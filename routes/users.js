@@ -31,6 +31,11 @@ mysql> Show tables;
 | process_category  |
 | users             |
 +-------------------+
+git push https://github.com/CodeOp-tech/fspt18-team-2.git database
+npm install -g next
+npm install tailwindcss
+npm install typeface-inter
+
 
 
 */
@@ -97,7 +102,7 @@ router.get('/profile', (req, res) => {
 
 
 /* GET users listing. */
-router.get('/', async (req, res, next) {
+router.get('/', async (req, res, next) => {
   try {
    
     const usersList = await User.findAll();
