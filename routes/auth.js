@@ -24,10 +24,10 @@ mysql> Show tables;
 +-------------------+
 | Tables_in_artimdb |
 +-------------------+
-| artist_profiles   |
-| posts             |
-| process_category  |
-| users             |
+| Users  |
+| ArtistProfiles            |
+| ArtCategory  |
+| Posts             |
 +-------------------+
 git push https://github.com/CodeOp-tech/fspt18-team-2.git database
 npm install -g next
