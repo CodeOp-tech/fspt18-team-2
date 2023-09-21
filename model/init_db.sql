@@ -6,7 +6,7 @@ SET foreign_key_checks = 0;
 
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS ArtistProfiles;
-DROP TABLE IF EXISTS ArtCategory;
+DROP TABLE IF EXISTS ArtCategories;
 DROP TABLE IF EXISTS Posts;
 
 
@@ -34,7 +34,7 @@ CREATE TABLE Users
 
 
 
-CREATE TABLE ArtCategory
+CREATE TABLE ArtCategories
 (
     id INT NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (id),
@@ -42,7 +42,10 @@ CREATE TABLE ArtCategory
     INDEX idx_category (Category)
 );
 
-
+INSERT INTO ArtCategories (Category) VALUES 
+("Traditional Art"), 
+("Digital Art"), 
+("Audiovisual");
 
 
 CREATE TABLE posts (
@@ -56,6 +59,6 @@ CREATE TABLE posts (
     Image2 VARCHAR(600) NULL,
     Image3 VARCHAR(600) NULL,
     Video VARCHAR(600) NULL,
-    FOREIGN KEY (Category) REFERENCES ArtCategory (Category),
+    FOREIGN KEY (Category) REFERENCES ArtCategories (Category),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
