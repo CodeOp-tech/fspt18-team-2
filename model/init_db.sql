@@ -5,9 +5,9 @@
 SET foreign_key_checks = 0;
 
 DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS artist_profiles;
-DROP TABLE IF EXISTS process_category;
-DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS ArtistProfiles;
+DROP TABLE IF EXISTS ArtCategory;
+DROP TABLE IF EXISTS Posts;
 
 
 SET foreign_key_checks = 1;
@@ -19,12 +19,14 @@ SET foreign_key_checks = 1;
 CREATE TABLE Users
 (
     UserID INT NOT NULL AUTO_INCREMENT,
-    username NVARCHAR(40) NOT NULL,
-    email NVARCHAR(255) NOT NULL,
-    PasswordHash BINARY(64) NOT NULL,
-    Salt CHAR(36) NOT NULL,
-    FirstName NVARCHAR(40) NULL,
-    LastName NVARCHAR(40) NULL,
+    Email VARCHAR(255) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    FullName VARCHAR(40) NOT NULL,
+    Pronouns VARCHAR(40) NULL,
+    UserCategory VARCHAR(255) NULL,
+    ArtistAvatar VARCHAR(600) NULL,
+    ArtistBio TEXT NULL,
+    ArtistWeb VARCHAR(200) NULL,
     PRIMARY KEY (UserID)
 );
 
@@ -32,40 +34,12 @@ CREATE TABLE Users
 
 
 
-
-
-
-
-
-
-
-
-    CREATE TABLE artist_profiles
-(
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    UserID INT NOT NULL,
-    username VARCHAR(40) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    artist_avatar VARCHAR(600) NULL,
-    artist_bio TEXT NULL,
-    artist_web VARCHAR(200) NULL,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
-    
-
-);
-
-
-
-
-
-
-
-CREATE TABLE process_category
+CREATE TABLE ArtCategory
 (
     id INT NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (id),
-    category VARCHAR(60) NOT NULL,
-    INDEX idx_category (category)
+    Category VARCHAR(60) NOT NULL,
+    INDEX idx_category (Category)
 );
 
 
@@ -75,13 +49,13 @@ CREATE TABLE posts (
     id INT NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (id),
     UserID INT NOT NULL,
-    post_title VARCHAR(40) NOT NULL,
-    category VARCHAR(60) NOT NULL,
-    post_body TEXT(1000) NOT NULL,
-    post_image_1 VARCHAR(600) NOT NULL,
-    post_image_2 VARCHAR(600) NULL,
-    post_image_3 VARCHAR(600) NULL,
-    post_video VARCHAR(600) NULL,
-    FOREIGN KEY (category) REFERENCES process_category(category),
+    Title VARCHAR(40) NOT NULL,
+    Category VARCHAR(60) NOT NULL,
+    Body TEXT(1000) NOT NULL,
+    Image1 VARCHAR(600) NOT NULL,
+    Image2 VARCHAR(600) NULL,
+    Image3 VARCHAR(600) NULL,
+    Video VARCHAR(600) NULL,
+    FOREIGN KEY (Category) REFERENCES ArtCategory (Category),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );

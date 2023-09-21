@@ -3,7 +3,7 @@ var router = express.Router();
 const bcrypt = require('bcrypt');
 const Sequelize = require('sequelize');
 require('dotenv').config();
-const { DB_NAME, DB_HOST, DB_PASS } = process.env;
+const {DB_NAME, DB_HOST, DB_PASS} = process.env;
 
 const sequelize = new Sequelize(DB_NAME, DB_HOST, DB_PASS, {
   host: 'localhost',
@@ -12,12 +12,10 @@ const sequelize = new Sequelize(DB_NAME, DB_HOST, DB_PASS, {
 
 
 const User = sequelize.define('User', {
-  username: Sequelize.STRING,
-  email: Sequelize.STRING,
-  PasswordHash: Sequelize.STRING,
-  salt: Sequelize.STRING,
-  FirstName: Sequelize.STRING,
-  LastName: Sequelize.STRING,
+  Email: Sequelize.STRING,
+  Password: Sequelize.STRING,
+  FullName: Sequelize.STRING,
+ 
 });
 
 
@@ -35,7 +33,7 @@ git push https://github.com/CodeOp-tech/fspt18-team-2.git database
 npm install -g next
 npm install tailwindcss
 npm install typeface-inter
-
+postman http://localhost:5001/api/auth
 
 
 */
@@ -48,21 +46,18 @@ router.post('/register', async (req, res) => {
   try {
 
     // Input info from Register Form
-    const {username, email, password, FirstName, LastName } = req.body;
+    const {Email, Password, FullName} = req.body;
 
     // The times we encript the password
     const saltRounds = 10; 
     const salt = await bcrypt.genSalt(saltRounds);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(Password, salt);
 
 
     const newUser = await User.create({
-      username,
-      email,
-      PasswordHash: hashedPassword,
-      salt,
-      FirstName,
-      LastName,
+      Email,
+      Password: hashedPassword,
+      FullName,
     });
  
   res.json({ message: 'User registered successfully', user: newUser });
@@ -91,10 +86,11 @@ router.post('/login', (req, res) => {
 
 //('users/profile')
 
+
 router.get('/profile', (req, res) => { 
 
 
-  res.json({username: username, email: email})
+  res.json({FullName: FullName, Email: Email, })
 
 });
 
@@ -102,16 +98,15 @@ router.get('/profile', (req, res) => {
 
 
 /* GET users listing. */
-router.get('/', async (req, res, next) => {
+router.get('/list', async (req, res, next) => {
   try {
    
     const usersList = await User.findAll();
     
     const formattedUsers = usersList.map(user => ({
-      username: user.username,
-      email: user.email,
-      FirstName: user.FirstName,
-      LastName: user.LastName,
+      Email: user.Email,
+      FullName: user.FullName,
+      
     }));
 
     res.json(formattedUsers);
@@ -121,7 +116,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-module.exports = router;
 
 
 
