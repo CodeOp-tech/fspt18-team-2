@@ -58,7 +58,7 @@ mysql> Show tables;
 +-------------------+
 | Users  |
 | ArtistProfiles            |
-| ArtCategory  |
+| ArtCategories  |
 | Posts             |
 +-------------------+
 git push https://github.com/CodeOp-tech/fspt18-team-2.git database
