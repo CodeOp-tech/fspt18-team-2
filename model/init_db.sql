@@ -30,9 +30,8 @@ CREATE TABLE Users
     PRIMARY KEY (UserID)
 );
 
-
-
-
+INSERT INTO Users(Email, Password, FullName) 
+VALUES ('janedoe@hotmail.com', 'password', 'Jane Doe');
 
 CREATE TABLE ArtCategories
 (
@@ -48,7 +47,7 @@ INSERT INTO ArtCategories (Category) VALUES
 ("Audiovisual");
 
 
-CREATE TABLE posts (
+CREATE TABLE Posts (
     id INT NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (id),
     UserID INT NOT NULL,
@@ -62,3 +61,6 @@ CREATE TABLE posts (
     FOREIGN KEY (Category) REFERENCES ArtCategories (Category),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+
+INSERT INTO Posts(UserID, Title, Category, Body, Image1) VALUES 
+(1, "We talk about Digital Art", "Digital Art", "bla bla bla blaaaaaa", "https://picsum.photos/200");
