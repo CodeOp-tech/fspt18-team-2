@@ -24,14 +24,34 @@ CREATE TABLE Users
     FullName VARCHAR(40) NOT NULL,
     Pronouns VARCHAR(40) NULL,
     UserCategory VARCHAR(255) NULL,
-    ArtistAvatar VARCHAR(600) NULL,
-    ArtistBio TEXT NULL,
-    ArtistWeb VARCHAR(200) NULL,
+    UserAvatar VARCHAR(600) NULL,
+    UserBio TEXT NULL,
+    UserWeb VARCHAR(200) NULL,
     PRIMARY KEY (UserID)
 );
 
-INSERT INTO Users(Email, Password, FullName) 
-VALUES ('janedoe@hotmail.com', 'password', 'Jane Doe');
+
+INSERT INTO Users (Email, Password, FullName) VALUES
+('janedoe@hotmail.com', 'password', 'Jane Doe'),
+
+(
+  "rosy.hunt@email.com",
+  "$2b$10$HTqJU9vp4p6uW1bIqpmM1elQ5vi5soQLsbHqRdr6dgxeleZv4aL5K",
+  "Rosy Hunt"
+  ),
+
+(
+  "carlos.Lopez@email.com",
+  "$2b$10$t5IfQ96eZFrgZ8Y57UWku.5PITs8wqAuVt4w7TC9cmjflaKlVgXOq",
+  "Carlos Lopez"
+  ),
+  
+(
+ "hanna.artist@email.com",
+ "$2b$10$fmXzrK.BB0l85WkwXcS/6.OYdrKluIZ.Q.6ktzrtmheJsejuvK2fy",
+ "Hanna Sutton"
+ );
+
 
 CREATE TABLE ArtCategories
 (
