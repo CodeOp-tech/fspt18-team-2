@@ -60,7 +60,7 @@ mysql> Show tables;
 | ArtCategories  |
 | Posts             |
 +-------------------+
-git push https://github.com/CodeOp-tech/fspt18-team-2.git database
+git push https://github.com/CodeOp-tech/fspt18-team-2.git database2
 npm install -g next
 npm install tailwindcss
 npm install typeface-inter
