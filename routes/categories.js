@@ -20,6 +20,8 @@ const ArtCategories = sequelize.define('ArtCategories', {
 
 //console.log(ArtCategories);
 
+// postman http://localhost:5001/categories
+
 /* GET ART CATEGORIES listing is working*/
 router.get('/art_categories', async (req, res, next) => {
     try {
