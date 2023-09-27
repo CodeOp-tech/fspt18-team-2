@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const Sequelize = require('sequelize');
 require('dotenv').config();
+const { authenticate } = require('../secretInfo/verifyToken');
+
 const { DB_USER, DB_NAME, DB_HOST, DB_PASS } = process.env;
 
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
@@ -28,39 +30,20 @@ const User = sequelize.define('User', {
 });
 
 
+// postman http://localhost:5001/users
 
-
-router.put('/profile', async (req, res) => {
+router.put('/profile',authenticate, async (req, res) => {
   try {
-    /* Input from Profile Form to update the following values inside the table User: 
-    FullName
-    Pronouns
-    UserCategory 
-    UserAvatar
-    UserBio
-    UserWeb
-
-    input from admin code:
-    isLogged / UserID / Email
-    (boolean: when it's true the profile can be updated, 
-    if the UserId and the Email are found)
     
+   
+    const {FullName, Pronouns, UserCategory, UserAvatar, UserBio, UserWeb} = req.body;
 
-
-    */
-    const {isLogged, UserID, Email, FullName, Pronouns, UserCategory, UserAvatar, UserBio, UserWeb} = req.body;
-      
-    if (!isLogged) {
-      console.log('Not Authenticated');
-      res.status(401).json({ message: 'Authentication failed' });
-      return; 
-    }
 
     // UserID exists ?
     const user = await User.findOne({
       where: {
-            UserID: UserID,
-            Email: Email,
+            UserID: req.userId,
+            Email: req.email,
       },
     });
 
@@ -90,3 +73,17 @@ router.put('/profile', async (req, res) => {
 });
 
 module.exports = router;
+
+
+/* Input from Profile Form to update the following values inside the table User: 
+    FullName
+    Pronouns
+    UserCategory 
+    UserAvatar
+    UserBio
+    UserWeb
+
+    input from admin code:
+    authenticate (to see if the user is autenticated)
+    if the UserId and the Email are found)
+    */
