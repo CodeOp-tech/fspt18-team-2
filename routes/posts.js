@@ -19,9 +19,10 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  console.log(req.body);
   try {
     await db(`INSERT INTO Posts(UserID, Title, Category, Body, Image1, Image2, Image3, Video) 
-    VALUES (${req.body.UserID}, '${req.body.Title}', '${req.body.Category}', '${req.body.Body}', '${req.body.Image1}', '${req.body.Image2}', '${req.body.Image3}', '${req.body.Video}');`);
+    VALUES (${req.body.userID}, '${req.body.title}', '${req.body.category}', '${req.body.body}', '${req.body.image1}', '${req.body.image2}', '${req.body.image3}', '${req.body.video}');`);
 
     const result = await db(`SELECT * FROM Posts;`);
 

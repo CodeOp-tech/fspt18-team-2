@@ -6,10 +6,11 @@ To get started:
 - In the root folder of this project, create a `.env` file containing the next information:
 
 ```
-DB_HOST = localhost
-DB_USER = root
-DB_PASS = YOURPASSWORD
-DB_NAME = artimdb
+DB_HOST =localhost
+DB_USER =root
+DB_PASS =YOURPASSWORD
+DB_NAME =artimdb
+JWT_SECRET=yoursecretlongkey
 ```
 - Run `npm install` to install the server's required packages
 - Run `npm run migrate` to create your DB tables

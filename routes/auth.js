@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt');
 const Sequelize = require('sequelize');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const { DB_USER, DB_NAME, DB_HOST, DB_PASS } = process.env;
+const { DB_USER, DB_NAME, DB_HOST, DB_PASS,JWT_SECRET } = process.env;
 
 
 
@@ -12,7 +13,7 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   dialect: 'mysql', 
 });
 
-console.log(sequelize);
+//console.log(sequelize);
 
 const User = sequelize.define('User', {
   UserID: {
@@ -44,14 +45,6 @@ createdAt: {
   },
 
 
-
-*/
-
-
-
-
-
-/*
 mysql> Show tables;
 +-------------------+
 | Tables_in_artimdb |
@@ -61,9 +54,35 @@ mysql> Show tables;
 | Posts             |
 +-------------------+
 git push https://github.com/CodeOp-tech/fspt18-team-2.git database2
-npm install -g next
-npm install tailwindcss
-npm install typeface-inter
+
+Express.js (Web Framework):
+Installation: npm install express
+
+bcrypt (Password Hashing):
+Installation: npm install bcrypt
+
+Sequelize (Object-Relational Mapping for Databases):
+Installation: npm install sequelize
+
+dotenv (Environment Variables Management):
+Installation: npm install dotenv
+
+Next.js (React Framework):
+Installation (global): npm install -g next
+
+Tailwind CSS (CSS Framework):
+Installation: npm install tailwindcss
+
+Typeface Inter (Typography for Web):
+Installation: npm install typeface-inter
+
+Axios (HTTP Requests):
+Installation: npm install axios
+
+Node Package Manager
+Installation: npm install jsonwebtoken
+
+
 postman http://localhost:5001/auth
 
 
@@ -140,20 +159,36 @@ router.post('/login', async (req, res) => {
       console.log(isPasswordValid); 
 
       if (isPasswordValid) {
+
+
+        const payload = {
+          UserID: user.UserID,
+          Email: user.Email,
+        };
+
+        const token = jwt.sign(payload, JWT_SECRET);
+       // const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' } );
+
+
+        console.log(token);
+
         console.log('User found:');
         console.log(user.toJSON());
-        return res.json({ message: 'User logged in successfully' });
+        return res.json({ message: 'User logged in successfully', token });
       }
     }
 
     console.log('User not found or password is incorrect.');
     res.status(401).json({ message: 'Authentication failed' });
-
   } catch (error) {
     console.error('Error finding user:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+
+
+
 
 
 
