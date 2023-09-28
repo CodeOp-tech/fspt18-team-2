@@ -12,5 +12,5 @@ export default function Home() {
       <Link href="/posts">POSTS</Link>
       
     </main>
-  )
+  );
 }
