@@ -32,7 +32,7 @@ export default function Posts() {
 
   const addPost = async (post) => {
     try {
-      const response = await fetch("/posts", {
+      const response = await fetch("http://localhost:5001/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,8 +49,9 @@ export default function Posts() {
         }),
       });
 
-      console.log(post);
+      
       if (response.ok) {
+        console.log(post);
         const posts = await response.json();
         setPost({
           userID: 1,
@@ -100,17 +101,16 @@ export default function Posts() {
               <option value="Audiovisual">Audiovisual</option>
             </select>
 
-            <input
+            {/* <input
               type="text"
               name="category"
               value={post.category}
               onChange={(e) => handleChange(e)}
-            />
+            /> */}
           </p>
           <p>
-            <label htmlFor="body">body</label>
-            <input
-              type="text"
+            <label htmlFor="body">Body</label>
+            <textarea
               name="body"
               value={post.body}
               onChange={(e) => handleChange(e)}
