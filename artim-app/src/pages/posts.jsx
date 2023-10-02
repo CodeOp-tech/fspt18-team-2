@@ -78,22 +78,22 @@ export default function Posts() {
   };
 
   return (
-    <div className={`p-10`}>
+    <div className="p-10">
       <main>
-        <form className={`p-8 border border-solid text-center`} onSubmit={(e) => handleSubmit(e)}>
-        <h1 className={`p-8 text-xl`}>Write a post</h1>
-          <p className={`p-2`}>
-            <label className={`pr-8`} htmlFor="title">Title</label>
-            <input className={`border border-solid`}
+        <form className="p-8 border border-solid text-center" onSubmit={(e) => handleSubmit(e)}>
+        <h1 className="p-8 text-xl">New post</h1>
+          <p className="p-2">
+            <label className="pr-8" htmlFor="title">Title</label>
+            <input className="border border-solid"
               type="text"
               name="title"
               value={post.title}
               onChange={(e) => handleChange(e)}
             />
           </p>
-          <p className={`p-2`}>
-            <label className={`pr-8`} htmlFor="category">Category</label>
-            <select className={`border border-solid`}
+          <p className="p-2">
+            <label className="pr-8" htmlFor="category">Category</label>
+            <select className="border border-solid"
               name="category"
               id="category"
               value={post.category}
@@ -105,55 +105,49 @@ export default function Posts() {
               <option value="Audiovisual">Audiovisual</option>
             </select>
           </p>
-          <p className={`p-2`}>
+          <p className="p-2">
             <label htmlFor="body">Article</label>
-            <p className={`py-2 px-28`}>
+            <p className="py-2 px-28">
             <Editor onEditorChange={(content) => setPost({ ...post, body: content })} />
             </p>
-            
-            {/* <textarea
-              name="body"
-              value={post.body}
-              onChange={(e) => handleChange(e)}
-            /> */}
           </p>
-          <p className={`p-2`}>
-            <label className={`pr-8`} htmlFor="image1">Image 1</label>
-            <input className={`border border-solid`}
+          <p className="p-2">
+            <label className="pr-8" htmlFor="image1">Image 1</label>
+            <input className="border border-solid"
               type="text"
               name="image1"
               value={post.image1}
               onChange={(e) => handleChange(e)}
             />
           </p>
-          <p className={`p-2`}>
-            <label className={`pr-8`} htmlFor="image2">Image 2</label>
-            <input className={`border border-solid`}
+          <p className="p-2">
+            <label className="pr-8" htmlFor="image2">Image 2</label>
+            <input className="border border-solid"
               type="text"
               name="image2"
               value={post.image2}
               onChange={(e) => handleChange(e)}
             />
           </p>
-          <p className={`p-2`}>
-            <label className={`pr-8`} htmlFor="image 3">Image 3</label>
-            <input className={`border border-solid`}
+          <p className="p-2">
+            <label className="pr-8" htmlFor="image 3">Image 3</label>
+            <input className="border border-solid"
               type="text"
               name="image3"
               value={post.image3}
               onChange={(e) => handleChange(e)}
             />
           </p>
-          <p className={`p-2`}>
-            <label className={`pr-8`} htmlFor="video">Video</label>
-            <input className={`border border-solid`}
+          <p className="p-2">
+            <label className="pr-8" htmlFor="video">Video</label>
+            <input className="border border-solid"
               type="text"
               name="video"
               value={post.video}
               onChange={(e) => handleChange(e)}
             />
           </p>
-          <button className={`m-14 px-2 py-1 border border-solid rounded-lg`} type="submit">submit</button>
+          <button className="m-14 px-2 py-1 border border-solid rounded-lg" type="submit">submit</button>
         </form>
       </main>
     </div>
