@@ -1,6 +1,5 @@
 import { useState } from "react";
-import dynamic from 'next/dynamic'
-
+import dynamic from 'next/dynamic';
 
 var Editor = dynamic(() => import("../components/Editor"), {
   ssr: false
@@ -82,7 +81,7 @@ export default function Posts() {
       <main>
         <form className="p-8 border border-solid text-center" onSubmit={(e) => handleSubmit(e)}>
         <h1 className="p-8 text-xl">New post</h1>
-          <p className="p-2">
+          <div className="p-2">
             <label className="pr-8" htmlFor="title">Title</label>
             <input className="border border-solid"
               type="text"
@@ -90,8 +89,8 @@ export default function Posts() {
               value={post.title}
               onChange={(e) => handleChange(e)}
             />
-          </p>
-          <p className="p-2">
+          </div>
+          <div className="p-2">
             <label className="pr-8" htmlFor="category">Category</label>
             <select className="border border-solid"
               name="category"
@@ -104,14 +103,14 @@ export default function Posts() {
               <option value="Digital Art">Digital Art</option>
               <option value="Audiovisual">Audiovisual</option>
             </select>
-          </p>
-          <p className="p-2">
+          </div>
+          <div className="p-2">
             <label htmlFor="body">Article</label>
-            <p className="py-2 px-28">
+            <div className="py-2 px-28">
             <Editor onEditorChange={(content) => setPost({ ...post, body: content })} />
-            </p>
-          </p>
-          <p className="p-2">
+            </div>
+          </div>
+          <div className="p-2">
             <label className="pr-8" htmlFor="image1">Image 1</label>
             <input className="border border-solid"
               type="text"
@@ -119,8 +118,8 @@ export default function Posts() {
               value={post.image1}
               onChange={(e) => handleChange(e)}
             />
-          </p>
-          <p className="p-2">
+          </div>
+          <div className="p-2">
             <label className="pr-8" htmlFor="image2">Image 2</label>
             <input className="border border-solid"
               type="text"
@@ -128,8 +127,8 @@ export default function Posts() {
               value={post.image2}
               onChange={(e) => handleChange(e)}
             />
-          </p>
-          <p className="p-2">
+          </div>
+          <div className="p-2">
             <label className="pr-8" htmlFor="image 3">Image 3</label>
             <input className="border border-solid"
               type="text"
@@ -137,8 +136,8 @@ export default function Posts() {
               value={post.image3}
               onChange={(e) => handleChange(e)}
             />
-          </p>
-          <p className="p-2">
+          </div>
+          <div className="p-2">
             <label className="pr-8" htmlFor="video">Video</label>
             <input className="border border-solid"
               type="text"
@@ -146,7 +145,7 @@ export default function Posts() {
               value={post.video}
               onChange={(e) => handleChange(e)}
             />
-          </p>
+          </div>
           <button className="m-14 px-2 py-1 border border-solid rounded-lg" type="submit">submit</button>
         </form>
       </main>
