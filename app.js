@@ -1,17 +1,19 @@
 const cors = require("cors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+
+const indexRouter = require("./routes/index");
+const authRouter = require("./routes/auth");
+const categoriesRouter = require("./routes/categories");
+const usersRouter = require("./routes/users");
+const public_searchRouter = require("./routes/public_search");
+const user_searchRouter = require("./routes/user_search");
 
 
-var indexRouter = require("./routes/index");
-var authRouter = require("./routes/auth");
-var postsRouter = require("./routes/posts");
-var categoriesRouter = require("./routes/categories");
-var usersRouter = require("./routes/users");
+const app = express();
 
-var app = express();
 
 app.use(cors());
 app.use(logger("dev"));
@@ -25,6 +27,7 @@ app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
 app.use("/categories", categoriesRouter);
 app.use("/users", usersRouter);
-
+app.use("/public_search", public_searchRouter);
+app.use("/user_search", user_searchRouter);
 
 module.exports = app;
