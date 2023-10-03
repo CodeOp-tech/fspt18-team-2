@@ -11,7 +11,9 @@ const usersRouter = require("./routes/users");
 const public_searchRouter = require("./routes/public_search");
 const user_searchRouter = require("./routes/user_search");
 
+
 const app = express();
+
 
 app.use(cors());
 app.use(logger("dev"));
@@ -22,6 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
+app.use("/posts", postsRouter);
 app.use("/categories", categoriesRouter);
 app.use("/users", usersRouter);
 app.use("/public_search", public_searchRouter);
