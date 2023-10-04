@@ -10,6 +10,7 @@ const categoriesRouter = require("./routes/categories");
 const usersRouter = require("./routes/users");
 const public_searchRouter = require("./routes/public_search");
 const user_searchRouter = require("./routes/user_search");
+const postsRouter = require("./routes/posts");
 
 
 const app = express();
@@ -29,5 +30,6 @@ app.use("/categories", categoriesRouter);
 app.use("/users", usersRouter);
 app.use("/public_search", public_searchRouter);
 app.use("/user_search", user_searchRouter);
+app.use("/posts", postsRouter);
 
 module.exports = app;
