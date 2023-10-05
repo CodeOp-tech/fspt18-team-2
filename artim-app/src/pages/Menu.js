@@ -23,6 +23,7 @@ export default function Menu() {
           <TfiLayoutListPost />
           <span>CREATE POST</span>
         </Link>
+
       </div>
     </header>
   );
