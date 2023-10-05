@@ -19,6 +19,7 @@ JWT_SECRET=yoursecretlongkey
 # Work with GIT:
 1- Siempre antes de empezar a trabajar, es importante verificar que estén en su rama o branch.
 2- Si quieren actualizar la rama en la que están trabajando para que incluya los cambios que hay en la rama main  (pasos a-f), o hacer un pull request para incluir los cambios de su rama en la rama main (pasos a-g), pueden seguir los siguientes pasos:
+
 ```
 `git checkout main` para volver a la rama main *
 `git pull`  para traer los últimos cambios de main
