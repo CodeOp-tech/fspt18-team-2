@@ -108,7 +108,7 @@ router.get('/', async (req, res) => {
           { Body: { [Op.like]: `%${searchTermWithoutPhrases}%` } },
         ],
       },
-      attributes: ['id','Title', 'Category', 'Body'], // these info will be the only shown in the search result
+      attributes: ['id','Title', 'Category', 'Body', "Image1"], // these info will be the only shown in the search result
     });
 
     console.log(postInfo);
