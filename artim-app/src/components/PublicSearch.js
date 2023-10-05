@@ -55,10 +55,13 @@ export default function SearchComponent() {
     fetchData();
   }, [searchedTerm]);
 
+  
+
+
   return (
     <div>
    
-      <div className='Search_form'>
+      <div className='items-center gap-4'>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -81,7 +84,7 @@ export default function SearchComponent() {
           <p>Error: {error.message}</p>
         ) : found ? ( // Check if apiResponse is not null
             <div>
-           <div>{apiResponse.message} <IoCheckmarkDoneCircleSharp/></div>   
+           <div className='flex items-center gap-2'>{apiResponse.message} <IoCheckmarkDoneCircleSharp/></div>   
             
             <ul>
               {apiResponse.postInfo.map((item) => (
@@ -92,7 +95,8 @@ export default function SearchComponent() {
                   <Divider className="my-4" />
                   <Image src={item.Image1} alt={item.Title} shadow="lg" layout="responsive" isZoomed />
                    
-                  <h3>Category: {item.Category}</h3>
+                    <h3>Category: {item.Category}</h3>
+                    
                   <Divider className="my-4" />
                   <p>{item.Body}</p>
                     <Divider className="my-4" />
@@ -128,6 +132,9 @@ const list = [
   "QwiREE"
 ];
 
+{item.Category.map(v => (
+        <Compo key={v} value={v} higlight={text} />
+      ))}
 export default function App() {
   const [text, setText] = useState("");
 
@@ -144,23 +151,23 @@ export default function App() {
     </div>
   );
 }
-
 const Compo = ({ higlight, value }) => {
-  return <p>{getHighlightedText(value, higlight)}</p>;
-};
+    return <p>{getHighlightedText(value, higlight)}</p>;
+  };
+  
+  function getHighlightedText(text, higlight) {
+    // Split text on higlight term, include term itself into parts, ignore case
+    var parts = text.split(new RegExp(`(${higlight})`, "gi"));
+    return parts.map((part, index) => (
+      <React.Fragment key={index}>
+        {part.toLowerCase() === higlight.toLowerCase() ? (
+          <b style={{ backgroundColor: "#e8bb49" }}>{part}</b>
+        ) : (
+          part
+        )}
+      </React.Fragment>
+    ));
 
-function getHighlightedText(text, higlight) {
-  // Split text on higlight term, include term itself into parts, ignore case
-  var parts = text.split(new RegExp(`(${higlight})`, "gi"));
-  return parts.map((part, index) => (
-    <React.Fragment key={index}>
-      {part.toLowerCase() === higlight.toLowerCase() ? (
-        <b style={{ backgroundColor: "#e8bb49" }}>{part}</b>
-      ) : (
-        part
-      )}
-    </React.Fragment>
-  ));
 }
 
 
