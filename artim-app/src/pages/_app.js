@@ -6,6 +6,7 @@ import Menu from './Menu';
 
 export default function App({ Component, pageProps }) {
   return (
+    <>
     <NextUIProvider>
       <div className='app'>
         <Menu />
