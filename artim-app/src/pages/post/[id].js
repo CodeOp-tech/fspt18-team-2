@@ -17,7 +17,6 @@ export default function Post(props) {
     fetch(`http://localhost:5001/posts/${id}`)
       .then((res) => res.json())
       .then((json) => {
-        console.log("json -----> ", json)
         setPost(json);
       })
       .catch((error) => {
@@ -25,7 +24,6 @@ export default function Post(props) {
       })
     }
   }, [id]);
-  console.log("post -----> ", post)
   
   return (
     <div>
