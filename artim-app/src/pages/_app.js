@@ -7,10 +7,14 @@ export default function App({ Component, pageProps }) {
   return (
     <NextUIProvider>
       <div className='app'>
-        <Menu/>
-      <Component {...pageProps} />
+        <Menu />
+        <main className="max-w-screen-lg w-full mx-auto px-2 my-6">
+          <Component {...pageProps} />
+          
+          </main>
     </div>
     </NextUIProvider>
 
   );
 }
+
