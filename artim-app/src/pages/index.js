@@ -10,7 +10,7 @@ export default function Home() {
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
-      <Link href="/posts">CREATE POST</Link>
+      <Link href="/creationpost">CREATE POST</Link>
       <PostsList />
     </main>
   );

@@ -29,7 +29,7 @@ export function PostsList() {
               </Link>
               <p>{post.Title}</p>
               <p>{post.Category}</p>
-              <div dangerouslySetInnerHTML={{ __html: post.Body }} />
+              <div className="h-24 overflow-hidden text-xs" dangerouslySetInnerHTML={{ __html: post.Body }} />
             </div>
           ))}
         </div>
