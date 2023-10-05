@@ -20,7 +20,7 @@ export default function Menu() {
       </div>   
      
       <div className='menu_item'>
-        <Link href="/posts">CREATE POST</Link>
+        <Link href="/creationpost">CREATE POST</Link>
         <TfiLayoutListPost/>
       </div>
     </div>
