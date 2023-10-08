@@ -4,7 +4,6 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-
 var indexRouter = require("./routes/index");
 var authRouter = require("./routes/auth");
 var postsRouter = require("./routes/posts");
@@ -25,6 +24,5 @@ app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
 app.use("/categories", categoriesRouter);
 app.use("/users", usersRouter);
-
 
 module.exports = app;

@@ -16,7 +16,7 @@ function LoginForm() {
     };
 
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch("http://localhost:3000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,7 +40,7 @@ function LoginForm() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 ">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
