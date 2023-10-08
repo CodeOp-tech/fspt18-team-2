@@ -1,6 +1,14 @@
 import { useState } from "react";
+import dynamic from 'next/dynamic';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/router'
 
-export default function Posts() {
+var Editor = dynamic(() => import("../components/Editor"), {
+  ssr: false
+})
+
+export default function CreationPost() {
+  const router = useRouter()
   const [error, setError] = useState("");
   const [post, setPost] = useState({
     userID: 1,
@@ -51,8 +59,8 @@ export default function Posts() {
 
       
       if (response.ok) {
-        console.log(post);
         const posts = await response.json();
+        toast.success("You've created a blog post");
         setPost({
           userID: 1,
           title: "",
@@ -63,96 +71,88 @@ export default function Posts() {
           image3: "",
           video: "",
         });
+        router.push(`/post/${posts[posts.length -1].id}`);
         return posts;
       }
       setError("oups, something went wrong");
+      toast.error("This didn't work.");
     } catch (error) {
       setError("oups, something went wrong");
+      toast.error("This didn't work.")
     }
   };
 
   return (
-    <div>
+    <div className="p-10">
       <main>
-        <h1>Posts Creation page</h1>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          Creation Form
-          <p>
-            <label htmlFor="title">Title</label>
-            <input
+        <form className="p-8 border border-solid text-center" onSubmit={(e) => handleSubmit(e)}>
+        <h1 className="p-8 text-xl">New post</h1>
+          <div className="p-2">
+            <label className="pr-8" htmlFor="title">Title</label>
+            <input className="border border-solid"
               type="text"
               name="title"
               value={post.title}
               onChange={(e) => handleChange(e)}
             />
-          </p>
-          <p>
-            <label htmlFor="category">category</label>
-            <select
+          </div>
+          <div className="p-2">
+            <label className="pr-8" htmlFor="category">Category</label>
+            <select className="border border-solid"
               name="category"
               id="category"
               value={post.category}
               onChange={(e) => handleChange(e)}
             >
-              category
               <option value="">Choose category</option>
               <option value="Traditional Art">Traditional Art</option>
               <option value="Digital Art">Digital Art</option>
               <option value="Audiovisual">Audiovisual</option>
             </select>
-
-            {/* <input
-              type="text"
-              name="category"
-              value={post.category}
-              onChange={(e) => handleChange(e)}
-            /> */}
-          </p>
-          <p>
-            <label htmlFor="body">Body</label>
-            <textarea
-              name="body"
-              value={post.body}
-              onChange={(e) => handleChange(e)}
-            />
-          </p>
-          <p>
-            <label htmlFor="image1">image1</label>
-            <input
+          </div>
+          <div className="p-2">
+            <label htmlFor="body">Article</label>
+            <div className="py-2 px-28">
+            <Editor onEditorChange={(content) => setPost({ ...post, body: content })} />
+            </div>
+          </div>
+          <div className="p-2">
+            <label className="pr-8" htmlFor="image1">Image 1</label>
+            <input className="border border-solid"
               type="text"
               name="image1"
               value={post.image1}
               onChange={(e) => handleChange(e)}
             />
-          </p>
-          <p>
-            <label htmlFor="image2">image2</label>
-            <input
+          </div>
+          <div className="p-2">
+            <label className="pr-8" htmlFor="image2">Image 2</label>
+            <input className="border border-solid"
               type="text"
               name="image2"
               value={post.image2}
               onChange={(e) => handleChange(e)}
             />
-          </p>
-          <p>
-            <label htmlFor="image3">image3</label>
-            <input
+          </div>
+          <div className="p-2">
+            <label className="pr-8" htmlFor="image 3">Image 3</label>
+            <input className="border border-solid"
               type="text"
               name="image3"
               value={post.image3}
               onChange={(e) => handleChange(e)}
             />
-          </p>
-          <p>
-            <label htmlFor="video">video</label>
-            <input
+          </div>
+          <div className="p-2">
+            <label className="pr-8" htmlFor="video">Video</label>
+            <input className="border border-solid"
               type="text"
               name="video"
               value={post.video}
               onChange={(e) => handleChange(e)}
             />
-          </p>
-          <button type="submit">submit</button>
+          </div>
+          <button className="m-14 px-2 py-1 border border-solid rounded-lg" type="submit">submit</button>
         </form>
       </main>
     </div>

@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const { DB_USER, DB_NAME, DB_HOST, DB_PASS,JWT_SECRET } = process.env;
-
+const { authenticate } = require('../secretInfo/verifyToken');
 
 
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
@@ -53,7 +53,7 @@ mysql> Show tables;
 | ArtCategories  |
 | Posts             |
 +-------------------+
-git push https://github.com/CodeOp-tech/fspt18-team-2.git database2
+git push https://github.com/CodeOp-tech/fspt18-team-2.git newbranch  
 
 Express.js (Web Framework):
 Installation: npm install express
@@ -193,7 +193,7 @@ router.post('/login', async (req, res) => {
 
 
 /* GET users listing. */
-router.get('/user_list', async (req, res, next) => {
+router.get('/user_list', authenticate , async (req, res, next) => {
   try {
    
     const usersList = await User.findAll();
