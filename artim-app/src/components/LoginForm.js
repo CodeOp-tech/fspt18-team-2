@@ -6,8 +6,8 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [token, setToken] = useState("");
-  const { isLogged, login, logout } = useAuth();
+ 
+  const { isLogged, login, logout, token } = useAuth();
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
@@ -17,13 +17,14 @@ function LoginForm() {
       setError("Email and password are required.");
       return;
     }
+    
 
     const formData = {
       Email: email,
       Password: password,
     };
 
-    console.log("FormData", formData);
+    console.log("FormData",formData);
 
     try {
       const response = await fetch("http://localhost:5001/auth/login", {
@@ -45,8 +46,9 @@ function LoginForm() {
         console.log(token);
 
         // Set the token in the state
-        setToken(token);
-        login();
+        login(token);
+       
+
 
         console.log("User logged in successfully");
         console.log("Token:", token);
@@ -62,13 +64,13 @@ function LoginForm() {
     }
   };
 
-  const handleLogout = () => {
-    setToken("");
-    logout();
+ const handleLogout = () => {
+   logout();
+   console.log("User Logged out!!")
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 ">
+    <div>
       <h2>Login</h2>
       {isLogged ? (
         <div>
