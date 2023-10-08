@@ -53,7 +53,7 @@ mysql> Show tables;
 | ArtCategories  |
 | Posts             |
 +-------------------+
-git push https://github.com/CodeOp-tech/fspt18-team-2.git newbranch  
+git push https://github.com/CodeOp-tech/fspt18-team-2.git newbranch2  
 
 Express.js (Web Framework):
 Installation: npm install express

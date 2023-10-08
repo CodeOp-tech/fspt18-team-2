@@ -1,16 +1,24 @@
-// AuthContext.js
 import React, { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [isLogged, setIsLogged] = useState(false);
+  const [token, setToken] = useState(""); // Add token state
 
-  const login = () => setIsLogged(true);
-  const logout = () => setIsLogged(false);
+  const login = (userToken) => {
+    setIsLogged(true);
+      setToken(userToken); 
+      console.log(userToken);
+  };
+
+  const logout = () => {
+    setIsLogged(false);
+    setToken(""); 
+  };
 
   return (
-    <AuthContext.Provider value={{ isLogged, login, logout }}>
+    <AuthContext.Provider value={{ isLogged, login, logout, token }}>
       {children}
     </AuthContext.Provider>
   );

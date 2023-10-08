@@ -5,10 +5,11 @@ import { BsSearchHeart } from 'react-icons/bs';
 import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5';
 import Pagination from './Pagination';
 import HighlightText from './HighlightText';
+import { useAuth } from "./AuthContext";
 
 
 
-const PublicSearch = () => {
+const UserSearch = () => {
   const [apiResponse, setApiResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,6 +18,8 @@ const PublicSearch = () => {
   const [foundImage, setFoundImage] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+ const { token } = useAuth();
+  
  
 
   const handleInputChange = (e) => {
@@ -31,14 +34,21 @@ const PublicSearch = () => {
 
   const fetchData = (page = totalPages) => {
     if (searchedTerm) {
-      const apiUrl = `http://localhost:5001/public_search?searched=${searchedTerm}&page=${page}`;
-      console.log('API URL:', apiUrl);
+      const apiUrl = `http://localhost:5001/user_search/${searchedTerm}`;
+        console.log('API URL:', apiUrl);
+        console.log("private search");
+        console.log(token);
 
       setLoading(true);
       setError(null);
 
-      axios
-        .get(apiUrl)
+     
+      axios.get(apiUrl, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+
+        },
+      })
         .then((response) => {
           console.log('Response Data:', response.data);
           if (response.data.message === 'Found it') {
@@ -172,4 +182,4 @@ const PublicSearch = () => {
   );
 };
 
-export default PublicSearch;
+export default UserSearch;

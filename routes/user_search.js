@@ -98,7 +98,7 @@ router.get('/:searched', authenticate, async (req, res) => {
 
     const phrasePattern = /"([^"]+)"/g;
     const phrases = searched.match(phrasePattern);
-    const searchTermWithoutPhrases = searched.replace(phrasePattern, '').trim();
+    const searchTermWithoutPhrases = searched.replace(phrases, '').trim();
 
     // Searching for users
     const userInfo = await User.findAll({

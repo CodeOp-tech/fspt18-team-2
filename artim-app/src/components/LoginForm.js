@@ -6,8 +6,8 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [token, setToken] = useState("");
-  const { isLogged, login, logout } = useAuth();
+ 
+  const { isLogged, login, logout, token } = useAuth();
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
@@ -46,8 +46,8 @@ function LoginForm() {
         console.log(token);
 
         // Set the token in the state
-        setToken(token);
-        login(); 
+        login(token);
+       
 
 
         console.log("User logged in successfully");
@@ -65,8 +65,8 @@ function LoginForm() {
   };
 
  const handleLogout = () => {
-    setToken("");
-    logout();
+   logout();
+   console.log("User Logged out!!")
   };
 
   return (
