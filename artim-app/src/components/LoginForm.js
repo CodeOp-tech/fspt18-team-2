@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { BsSearchHeart } from "react-icons/bs";
 import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
 
@@ -68,39 +70,64 @@ function LoginForm() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 ">
-      <h2>Login</h2>
-      {isLogged ? (
-        <div>
-          <p className="success-message">Logged in successfully!</p>
-          <button onClick={handleLogout}>Logout</button>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit}>
+    <div class="bg-white h-screen overflow-hidden flex items-center justify-center font-alegreya-sans">
+      <div class="rounded-lg bg-neutral-100 lg:w-6/12 md:9/12 w-12/12 shadow-2xl text-black p-8 text-center font-alegreya-sans">
+        <h2 className=" drop-shadow-md text-5xl font-bold mx-auto text-teal-400 font-alegreya-sans">
+          Welcome back!
+        </h2>
+        <h3 className="italic mb-12 text-neutral-500">
+          Please, enter your details
+        </h3>
+        {isLogged ? (
           <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <p className="success-message">Logged in successfully!</p>
+            <button onClick={handleLogout}>Logout</button>
           </div>
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit">Login</button>
-        </form>
-      )}
-      {error && <p className="error-message">{error}</p>}
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div class="mb-4">
+              <label htmlFor="email" className="block mb-1 text-left">
+                Email:
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200"
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="block mb-1 text-left">
+                Password:<br></br>
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200 mb-4"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-yellow-300 text-white font-extrabold py-2 px-4 rounded-md hover:bg-yellow-500 w-full mb-6"
+            >
+              Log In
+            </button>
+          </form>
+        )}
+        {error && <p className="error-message">{error}</p>}
+
+        <Link
+          href="/registration"
+          className="text-center gap-2 text-purple-500 "
+        >
+          <span className="font-bold">Or Sign Up</span>
+        </Link>
+      </div>
     </div>
   );
 }

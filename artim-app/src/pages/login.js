@@ -3,8 +3,12 @@ import LoginForm from "../components/LoginForm";
 
 const LoginPage = () => {
   return (
-    <div>
-      <h1>Login</h1>
+    <div
+      className=""
+      style={{
+        backgroundColor: "white", // Replace with your desired color code
+      }}
+    >
       <LoginForm />
     </div>
   );
