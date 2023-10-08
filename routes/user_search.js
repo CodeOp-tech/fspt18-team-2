@@ -76,7 +76,7 @@ const ArtCategories = sequelize.define('ArtCategories', {
   
 
 
-// on postman http://localhost:5001/user_search/Art
+// on postman http://localhost:5001/user_search/art?page=1
 // for Authorization (authenticate) use Bearer : with the user Token generated after login
 
 // CALL TO ACTION Search for a word or phrase 
@@ -90,6 +90,8 @@ router.get('/:searched', authenticate, async (req, res) => {
 
     const searched = req.params.searched;
     console.log('Search Term:', searched);
+
+    
 
     if (!searched || searched.trim() === '') {
       return res.status(400).json({ message: 'Invalid search term' });

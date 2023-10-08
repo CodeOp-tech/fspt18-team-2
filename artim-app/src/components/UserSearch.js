@@ -34,7 +34,7 @@ const UserSearch = () => {
 
   const fetchData = (page = totalPages) => {
     if (searchedTerm) {
-      const apiUrl = `http://localhost:5001/user_search/${searchedTerm}`;
+        const apiUrl = `http://localhost:5001/user_search/${searchedTerm}?page=${page}`;;
         console.log('API URL:', apiUrl);
         console.log("private search");
         console.log(token);
