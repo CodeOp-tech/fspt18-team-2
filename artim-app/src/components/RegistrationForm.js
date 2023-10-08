@@ -1,9 +1,8 @@
-// components/RegistrationForm.js
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
 const RegistrationForm = () => {
-  const { handleSubmit, control, errors } = useForm();
+  const {handleSubmit, control, errors } = useForm();
 
   const onSubmit = (data) => {
     console.log(data); // Replace with your registration logic

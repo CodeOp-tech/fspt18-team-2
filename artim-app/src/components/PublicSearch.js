@@ -4,8 +4,8 @@ import { Image } from '@nextui-org/react';
 import { Divider } from '@nextui-org/react';
 import { Button } from "@nextui-org/react";
 import { BsSearchHeart } from "react-icons/bs";
-
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+import HighlightText from './HighlightText';
 
 export default function SearchComponent() {
   const [apiResponse, setApiResponse] = useState(null);
@@ -13,7 +13,7 @@ export default function SearchComponent() {
   const [error, setError] = useState(null);
   const [searchedTerm, setSearchedTerm] = useState('');
   const [found, setfound] = useState('');
-  const [foundImage, setfoundImage ] = useState('');
+  const [foundImage, setfoundImage] = useState('');
 
   const handleInputChange = (e) => {
     setSearchedTerm(e.target.value);
@@ -55,121 +55,72 @@ export default function SearchComponent() {
     fetchData();
   }, [searchedTerm]);
 
-  
-
-
   return (
     <div>
-   
       <div className='items-center gap-4'>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter search term"
-          value={searchedTerm}
-          onChange={handleInputChange}
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Enter search term"
+            value={searchedTerm}
+            onChange={handleInputChange}
           />
-          
-        
-        <Button  fontsize="medium"  color="danger" aria-label="Like" shadow="lg" endContent={<BsSearchHeart/>} type="submit">SEARCH</Button>
+          <Button fontsize="medium" color="danger" aria-label="Like" shadow="lg" endContent={<BsSearchHeart />} type="submit">SEARCH</Button>
         </form>
-        {foundImage && <Image  src={foundImage} shadow="lg" layout="responsive" isZoomed />} 
-        </div>
+        {foundImage && <Image src={foundImage} shadow="lg" layout="responsive" isZoomed />}
+      </div>
 
-     
-      
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>Error: {error.message}</p>
-        ) : found ? ( // Check if apiResponse is not null
-            <div>
-           <div className='flex items-center gap-2'>{apiResponse.message} <IoCheckmarkDoneCircleSharp/></div>   
-            
-            <ul>
-              {apiResponse.postInfo.map((item) => (
-                <li key={item.id}>
-                   <div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error.message}</p>
+      ) : found ? (
+        <div>
+          <div className='flex items-center gap-2'>{apiResponse.message} <IoCheckmarkDoneCircleSharp /></div>
+
+          <ul>
+            {apiResponse.postInfo.map((item) => (
+              <li key={item.id}>
+                <div>
                   <Divider className="my-4" />
-                  <h2>{item.Title}</h2>
+                  {Array.isArray(item.Title) ? (
+                    item.Title.map((v) => (
+                      <HighlightText key={v} value={v} highlight={searchedTerm} />
+                    ))
+                  ) : (
+                    <HighlightText key={item.Title} value={item.Title} highlight={searchedTerm} />
+                  )}
                   <Divider className="my-4" />
                   <Image src={item.Image1} alt={item.Title} shadow="lg" layout="responsive" isZoomed />
-                   
-                    <h3>Category: {item.Category}</h3>
-                    
+                  {Array.isArray(item.Category) ? (
+                    item.Category.map((v) => (
+                      <HighlightText key={v} value={v} highlight={searchedTerm} />
+                    ))
+                  ) : (
+                    <HighlightText key={item.Category} value={item.Category} highlight={searchedTerm} />
+                  )}
                   <Divider className="my-4" />
-                  <p>{item.Body}</p>
-                    <Divider className="my-4" />
-                    </div>
-                </li>
-              ))}
-              </ul>
-              
-             
-                < div>
+                  {Array.isArray(item.Body) ? (
+                    item.Body.map((v) => (
+                      <HighlightText key={v} value={v} highlight={searchedTerm} />
+                    ))
+                  ) : (
+                    <HighlightText key={item.Body} value={item.Body} highlight={searchedTerm} />
+                  )}
+                  <Divider className="my-4" />
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <div>
             <p>Pagination:</p>
             <p>Page: {apiResponse.pagination.page}</p>
             <p>Limit: {apiResponse.pagination.limit}</p>
-                  <p>Total Post Info Count: {apiResponse.pagination.totalPostInfoCount}</p>
-                  </div>
+            <p>Total Post Info Count: {apiResponse.pagination.totalPostInfoCount}</p>
           </div>
-        ) : null}
-      </div>
-   
-  );
-}
-
-
-/*
-
-import React, { useEffect, useMemo, useState } from "react";
-import "./styles.css";
-
-const list = [
-  "This is the first text first",
-  "Second",
-  "Hi how are you hi!!!",
-  "QwiREE"
-];
-
-{item.Category.map(v => (
-        <Compo key={v} value={v} higlight={text} />
-      ))}
-export default function App() {
-  const [text, setText] = useState("");
-
-  return (
-    <div className="App">
-      <input
-        label="Text"
-        value={text}
-        onChange={e => setText(e.target.value)}
-      />
-      {list.map(v => (
-        <Compo key={v} value={v} higlight={text} />
-      ))}
+        </div>
+      ) : null}
     </div>
   );
 }
-const Compo = ({ higlight, value }) => {
-    return <p>{getHighlightedText(value, higlight)}</p>;
-  };
-  
-  function getHighlightedText(text, higlight) {
-    // Split text on higlight term, include term itself into parts, ignore case
-    var parts = text.split(new RegExp(`(${higlight})`, "gi"));
-    return parts.map((part, index) => (
-      <React.Fragment key={index}>
-        {part.toLowerCase() === higlight.toLowerCase() ? (
-          <b style={{ backgroundColor: "#e8bb49" }}>{part}</b>
-        ) : (
-          part
-        )}
-      </React.Fragment>
-    ));
-
-}
-
-
-
-*/
