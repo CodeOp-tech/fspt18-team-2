@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm, Controller } from "react-hook-form";
 
-function RegistrationForm() {
-  // State to manage form input values
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+const RegistrationForm = () => {
+  const { handleSubmit, control, errors } = useForm();
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
@@ -68,6 +66,6 @@ function RegistrationForm() {
       {error && <p className="error-message">{error}</p>}
     </div>
   );
-}
+};
 
 export default RegistrationForm;
