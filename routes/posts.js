@@ -18,6 +18,22 @@ router.get("/", async (req, res) => {
   }
 });
 
+/* GET ONE post. */
+router.get("/:id", async (req, res) => {
+  try {
+    const result = await db(`SELECT * FROM Posts WHERE id = ${req.params.id};`);
+
+    if (!result.data[0]) {
+      res.status(404).send();
+      return;
+    }
+    
+    res.send(result.data);
+  } catch (error) {
+    res.send(500);
+  }
+});
+
 router.post("/", async (req, res) => {
   //console.log(req.body);
   try {

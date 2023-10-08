@@ -1,11 +1,14 @@
 import { useState } from "react";
 import dynamic from 'next/dynamic';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/router'
 
 var Editor = dynamic(() => import("../components/Editor"), {
   ssr: false
 })
 
-export default function Posts() {
+export default function CreationPost() {
+  const router = useRouter()
   const [error, setError] = useState("");
   const [post, setPost] = useState({
     userID: 1,
@@ -56,8 +59,8 @@ export default function Posts() {
 
       
       if (response.ok) {
-        console.log(post);
         const posts = await response.json();
+        toast.success("You've created a blog post");
         setPost({
           userID: 1,
           title: "",
@@ -68,11 +71,14 @@ export default function Posts() {
           image3: "",
           video: "",
         });
+        router.push(`/post/${posts[posts.length -1].id}`);
         return posts;
       }
       setError("oups, something went wrong");
+      toast.error("This didn't work.");
     } catch (error) {
       setError("oups, something went wrong");
+      toast.error("This didn't work.")
     }
   };
 

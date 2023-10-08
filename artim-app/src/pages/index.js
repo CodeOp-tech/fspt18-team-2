@@ -1,19 +1,10 @@
 import { PostsList } from './PostsList';
 
-
-
-
 export default function Home() {
 
   return (
-    <main
-     
-    >
-     
+    <main>
       <PostsList />
-
-     
-
     </main>
   );
 }

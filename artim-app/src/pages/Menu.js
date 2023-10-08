@@ -41,7 +41,7 @@ export default function Menu() {
           <span>SEARCH</span>
         </Link>
 
-        <Link className="flex items-center gap-2" href="/posts">
+        <Link className="flex items-center gap-2" href="/creationpost">
           <TfiLayoutListPost />
           <span>CREATE POST</span>
         </Link>
