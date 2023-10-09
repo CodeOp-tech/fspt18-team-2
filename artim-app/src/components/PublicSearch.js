@@ -1,10 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Image, Divider, Button } from '@nextui-org/react';
-import { BsSearchHeart } from 'react-icons/bs';
-import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5';
-import Pagination from './Pagination';
-import HighlightText from './HighlightText';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Image } from "@nextui-org/react";
+import { Divider } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+import { BsSearchHeart } from "react-icons/bs";
+import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+import HighlightText from "./HighlightText";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Image, Divider, Button } from "@nextui-org/react";
+import { BsSearchHeart } from "react-icons/bs";
+import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+import Pagination from "./Pagination";
+import HighlightText from "./HighlightText";
 
 
 
@@ -12,12 +20,9 @@ const PublicSearch = () => {
   const [apiResponse, setApiResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [searchedTerm, setSearchedTerm] = useState('');
-  const [found, setFound] = useState('');
-  const [foundImage, setFoundImage] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
- 
+  const [searchedTerm, setSearchedTerm] = useState("");
+  const [found, setfound] = useState("");
+  const [foundImage, setfoundImage] = useState("");
 
   const handleInputChange = (e) => {
     setSearchedTerm(e.target.value);
@@ -31,8 +36,8 @@ const PublicSearch = () => {
 
   const fetchData = (page = totalPages) => {
     if (searchedTerm) {
-      const apiUrl = `http://localhost:5001/public_search?searched=${searchedTerm}&page=${page}`;
-      console.log('API URL:', apiUrl);
+      const apiUrl = `http://localhost:5001/public_search?searched=${searchedTerm}`;
+      console.log("API URL:", apiUrl);
 
       setLoading(true);
       setError(null);
@@ -40,9 +45,9 @@ const PublicSearch = () => {
       axios
         .get(apiUrl)
         .then((response) => {
-          console.log('Response Data:', response.data);
-          if (response.data.message === 'Found it') {
-            setFound(response.data.message);
+          console.log("Response Data:", response.data);
+          if (response.data.message === "Found it") {
+            setfound(response.data.message);
             setApiResponse(response.data);
             setTotalPages(response.data.pagination.totalPages);
             setFoundImage(response.data.postInfo[0].Image1);
@@ -50,7 +55,7 @@ const PublicSearch = () => {
           setLoading(false);
         })
         .catch((err) => {
-          console.error('Error:', err);
+          console.error("Error:", err);
           setError(err);
           setLoading(false);
         });
@@ -61,8 +66,6 @@ const PublicSearch = () => {
     setCurrentPage(newPage);
     fetchData(newPage);
   };
-
-  
 
   useEffect(() => {
     fetchData(currentPage);
@@ -77,6 +80,7 @@ const PublicSearch = () => {
             placeholder="Enter search term"
             value={searchedTerm}
             onChange={handleInputChange}
+            className="block w-full rounded-md py-2 px-12 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200"
           />
           <Button
             fontsize="medium"
@@ -104,22 +108,6 @@ const PublicSearch = () => {
             {apiResponse.message} <IoCheckmarkDoneCircleSharp />
           </div>
 
-          <Divider className="my-4" />
-          <div className="flex gap-6 justify-end">
-            <h2>Pagination:</h2>
-            <h4>Total Pages: {apiResponse.pagination.page}</h4>
-            <h4> Max Posts x Page : {apiResponse.pagination.limit}</h4>
-            <h4>Total Posts: {apiResponse.pagination.totalPostInfoCount}</h4>
-          </div>
-
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-
-          
-
           <ul>
             {apiResponse.postInfo.map((item) => (
               <li key={item.id}>
@@ -127,7 +115,11 @@ const PublicSearch = () => {
                   <Divider className="my-4" />
                   {Array.isArray(item.Title) ? (
                     item.Title.map((v) => (
-                      <HighlightText key={v} value={v} highlight={searchedTerm} />
+                      <HighlightText
+                        key={v}
+                        value={v}
+                        highlight={searchedTerm}
+                      />
                     ))
                   ) : (
                     <HighlightText
@@ -137,10 +129,20 @@ const PublicSearch = () => {
                     />
                   )}
                   <Divider className="my-4" />
-                  <Image src={item.Image1} alt={item.Title} shadow="lg" layout="responsive" isZoomed />
+                  <Image
+                    src={item.Image1}
+                    alt={item.Title}
+                    shadow="lg"
+                    layout="responsive"
+                    isZoomed
+                  />
                   {Array.isArray(item.Category) ? (
                     item.Category.map((v) => (
-                      <HighlightText key={v} value={v} highlight={searchedTerm} />
+                      <HighlightText
+                        key={v}
+                        value={v}
+                        highlight={searchedTerm}
+                      />
                     ))
                   ) : (
                     <HighlightText
@@ -152,7 +154,11 @@ const PublicSearch = () => {
                   <Divider className="my-4" />
                   {Array.isArray(item.Body) ? (
                     item.Body.map((v) => (
-                      <HighlightText key={v} value={v} highlight={searchedTerm} />
+                      <HighlightText
+                        key={v}
+                        value={v}
+                        highlight={searchedTerm}
+                      />
                     ))
                   ) : (
                     <HighlightText
@@ -166,6 +172,15 @@ const PublicSearch = () => {
               </li>
             ))}
           </ul>
+
+          <div>
+            <p>Pagination:</p>
+            <p>Page: {apiResponse.pagination.page}</p>
+            <p>Limit: {apiResponse.pagination.limit}</p>
+            <p>
+              Total Post Info Count: {apiResponse.pagination.totalPostInfoCount}
+            </p>
+          </div>
         </div>
       ) : null}
     </div>

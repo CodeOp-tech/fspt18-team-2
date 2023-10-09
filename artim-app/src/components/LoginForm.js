@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { BsSearchHeart } from "react-icons/bs";
 import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
 
@@ -6,7 +8,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
- 
+
   const { isLogged, login, logout, token } = useAuth();
 
   // Function to handle form submission
@@ -17,17 +19,16 @@ function LoginForm() {
       setError("Email and password are required.");
       return;
     }
-    
 
     const formData = {
       Email: email,
       Password: password,
     };
 
-    console.log("FormData",formData);
+    console.log("FormData", formData);
 
     try {
-      const response = await fetch("http://localhost:5001/auth/login", {
+      const response = await fetch("http://localhost:5001/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +49,6 @@ function LoginForm() {
 
         // Set the token in the state
         login(token);
-       
 
         console.log("User logged in successfully");
         console.log("token--->", token);
@@ -64,45 +64,67 @@ function LoginForm() {
     }
   };
 
- const handleLogout = () => {
-   logout();
-   console.log("User Logged out!!")
+  const handleLogout = () => {
+    logout();
+    console.log("User Logged out!!");
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      {isLogged ? (
-        <div>
-          <p className="success-message">Logged in successfully!</p>
-          <button onClick={handleLogout}>Logout</button>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit}>
+    <div class="bg-white h-screen overflow-hidden flex items-center justify-center font-alegreya-sans">
+      <div class="rounded-lg bg-neutral-100 lg:w-6/12 md:9/12 w-12/12 shadow-2xl text-black p-8 text-center font-alegreya-sans">
+        <h2 className=" drop-shadow-md text-5xl font-bold mx-auto text-teal-400 font-alegreya-sans">
+          Welcome back!
+        </h2>
+        <h3 className="italic mb-12 text-neutral-500">
+          Please, enter your details
+        </h3>
+        {isLogged ? (
           <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <p className="success-message">Logged in successfully!</p>
+            <button onClick={handleLogout}>Logout</button>
           </div>
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit">Login</button>
-        </form>
-      )}
-      {error && <p className="error-message">{error}</p>}
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div class="mb-4">
+              <label htmlFor="email" className="block mb-1 text-left">
+                Email:
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200"
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="block mb-1 text-left">
+                Password:<br></br>
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200 mb-6"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-yellow-300 text-white font-extrabold py-2 px-4 rounded-md hover:bg-yellow-500 w-full mb-8"
+            >
+              Log In
+            </button>
+          </form>
+        )}
+        {error && <p className="error-message text-red-500 mb-8">{error}</p>}
+
+        <Link href="/registration" className="text-pink-500 ">
+          <span className="font-bold mb-8">Or Sign Up</span>
+        </Link>
+      </div>
     </div>
   );
 }
