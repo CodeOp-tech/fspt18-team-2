@@ -1,3 +1,4 @@
+// Menu.js
 import Link from "next/link";
 import { BsSearchHeart } from "react-icons/bs";
 import { TfiLayoutListPost } from "react-icons/tfi";
@@ -8,9 +9,20 @@ import {
   BiSolidUserCheck,
 } from "react-icons/bi";
 import { useAuth } from "../components/AuthContext";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 export default function Menu() {
   const { isLogged } = useAuth();
+  const router = useRouter();
+
+  const GoToCreatePostClick = () => {
+    if (isLogged) router.push("/creationpost");
+    else {
+      toast.error("You must be logged in to create a post.");
+      router.push("#");
+    }
+  };
 
   return (
     <header className="bg-white p-4 shadow-md">
@@ -25,12 +37,9 @@ export default function Menu() {
               <span className="font-bold">Log Out</span>
             </Link>
 
-            <Link
-              href="/posts"
-              className="flex items-center gap-2 text-neutral-700"
-            >
+            <Link className="flex items-center gap-2" href="/posts">
               <TfiLayoutListPost />
-              <span>Create</span>
+              <span>CREATE POST</span>
             </Link>
           </>
         ) : (

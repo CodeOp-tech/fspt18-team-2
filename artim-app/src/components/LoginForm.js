@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BsSearchHeart } from "react-icons/bs";
 import React, { useState } from "react";
 import { useAuth } from "./AuthContext";
 
@@ -27,7 +28,7 @@ function LoginForm() {
     console.log("FormData", formData);
 
     try {
-      const response = await fetch("http://localhost:5001/auth/login", {
+      const response = await fetch("http://localhost:5001/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,13 +44,14 @@ function LoginForm() {
         const data = await response.json();
         const { token } = data;
 
-        console.log(token);
+        // Set the localStorage to access token in all app
+        localStorage.setItem("token", token);
 
         // Set the token in the state
         login(token);
 
         console.log("User logged in successfully");
-        console.log("Token:", token);
+        console.log("token--->", token);
       } else {
         // Handle login error
         const errorData = await response.json();

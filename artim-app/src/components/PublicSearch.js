@@ -189,6 +189,15 @@ const PublicSearch = () => {
               </li>
             ))}
           </ul>
+
+          <div>
+            <p>Pagination:</p>
+            <p>Page: {apiResponse.pagination.page}</p>
+            <p>Limit: {apiResponse.pagination.limit}</p>
+            <p>
+              Total Post Info Count: {apiResponse.pagination.totalPostInfoCount}
+            </p>
+          </div>
         </div>
       ) : null}
     </div>

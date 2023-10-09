@@ -16,6 +16,11 @@ const RegistrationForm = () => {
     const dataToSend = { Email, Password, FullName };
 
     console.log("Formdata:", formData);
+    const formData = {
+      email: email,
+      password: password,
+      fullName: fullName, // Include full name in the formData
+    };
 
     try {
       const response = await fetch("http://localhost:5001/auth/register", {
