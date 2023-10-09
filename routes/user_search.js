@@ -105,30 +105,46 @@ router.get('/:searched', authenticate, async (req, res) => {
     // Searching for users
     const userInfo = await User.findAll({
       where: {
-        [Op.or]: [
+        [Op.and]: [
           { FullName: { [Op.like]: `%${searchTermWithoutPhrases}%` } },
           { UserCategory: { [Op.like]: `%${searchTermWithoutPhrases}%` } },
           { UserBio: { [Op.like]: `%${searchTermWithoutPhrases}%` } },
+          {
+            [Op.or]: [
+              { FullName: { [Op.not]: null } },
+              { UserCategory: { [Op.not]: null } },
+              { UserBio: { [Op.not]: null } },
+            ],
+          },
         ],
       },
-      attributes: ['FullName', 'UserCategory', 'UserBio'],
+      attributes: ['UserID', 'FullName', 'UserCategory', 'UserBio'],
     });
+    
 
     // Searching for posts
     const postInfo = await Posts.findAll({
       where: {
-        [Op.or]: [
+        [Op.and]: [
           { Title: { [Op.like]: `%${searchTermWithoutPhrases}%` } },
           { Category: { [Op.like]: `%${searchTermWithoutPhrases}%` } },
           { Body: { [Op.like]: `%${searchTermWithoutPhrases}%` } },
+          {
+            [Op.or]: [
+              { Title: { [Op.not]: null } },
+              { Category: { [Op.not]: null } },
+              { Body: { [Op.not]: null } },
+            ],
+          },
         ],
       },
-      attributes: ['id','Title', 'Category', 'Body', 'Image1'], // these info will be the only shown in the search result
+      attributes: ['id', 'Title', 'Category', 'Body', 'Image1'],
     });
+    
 
     // Pagination
-    const page = req.query.page || 1;
-    const limit = req.query.limit || 12;
+    const page = req.query.page || 2;
+    const limit = req.query.limit || 4;
     const offset = (page - 1) * limit;
 
     const paginatedUserInfo = userInfo.slice(offset, offset + limit);
@@ -142,6 +158,31 @@ router.get('/:searched', authenticate, async (req, res) => {
 
     // Checking if paginatedUserInfo or paginatedPostInfo contains search results
     if (paginatedUserInfo.length > 0 || paginatedPostInfo.length > 0) {
+
+      console.log("paginatedUserInfo", paginatedUserInfo);
+      console.log("paginatedPostInfo", paginatedPostInfo);
+
+     /* const filteredPostInfo = paginatedPostInfo.filter((item) => {
+        return (
+          item.Title !== null && item.Title !== '' ||
+          item.Category !== null && item.Category !== '' ||
+          item.Body !== null && item.Body !== ''
+        );
+      });
+
+
+
+      const filteredUserInfo = paginatedUserInfo.filter((item) => {
+        return (
+          item.FullName !== null && item.FullName !== '' ||
+          item.UserCategory !== null && item.UserCategory !== '' ||
+          item.UserBio !== null && item.UserBio !== ''
+        );
+      });
+
+*/
+
+
       res.json({
         message: 'Found it',
         userInfo: paginatedUserInfo,
