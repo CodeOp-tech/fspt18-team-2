@@ -7,8 +7,6 @@ import Pagination from './Pagination';
 import HighlightText from './HighlightText';
 import { useAuth } from "./AuthContext";
 
-
-
 const UserSearch = () => {
   const [apiResponse, setApiResponse] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,9 +16,8 @@ const UserSearch = () => {
   const [foundImage, setFoundImage] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
- const { token } = useAuth();
-  
- 
+  const [userFound, setUserFound] = useState(false);
+  const { token } = useAuth();
 
   const handleInputChange = (e) => {
     setSearchedTerm(e.target.value);
@@ -34,36 +31,37 @@ const UserSearch = () => {
 
   const fetchData = (page = totalPages) => {
     if (searchedTerm) {
-        const apiUrl = `http://localhost:5001/user_search/${searchedTerm}?page=${page}`;;
-        console.log('API URL:', apiUrl);
-        console.log("private search");
-        console.log(token);
+      const apiUrl = `http://localhost:5001/user_search/${searchedTerm}?page=${page}`;
+      console.log('API URL:', apiUrl);
+      console.log("private search");
+      console.log(token);
 
       setLoading(true);
       setError(null);
 
-     
       axios.get(apiUrl, {
         headers: {
-            Authorization: `Bearer ${token}`,
-
+          Authorization: `Bearer ${token}`,
         },
       })
-        .then((response) => {
-          console.log('Response Data:', response.data);
-          if (response.data.message === 'Found it') {
-            setFound(response.data.message);
-            setApiResponse(response.data);
-            setTotalPages(response.data.pagination.totalPages);
-            setFoundImage(response.data.postInfo[0].Image1);
-          }
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error('Error:', err);
-          setError(err);
-          setLoading(false);
-        });
+      .then((response) => {
+        console.log('Response Data:', response.data);
+        if (response.data.message === 'Found it') {
+          setFound(response.data.message);
+          setApiResponse(response.data);
+          setTotalPages(response.data.pagination.totalPages);
+          setFoundImage(response.data.postInfo[0].Image1);
+          if (response.data.userInfo) {
+            setUserFound(true)  
+          };
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Error:', err);
+        setError(err);
+        setLoading(false);
+      });
     }
   };
 
@@ -71,8 +69,6 @@ const UserSearch = () => {
     setCurrentPage(newPage);
     fetchData(newPage);
   };
-
-  
 
   useEffect(() => {
     fetchData(currentPage);
@@ -128,8 +124,6 @@ const UserSearch = () => {
             onPageChange={handlePageChange}
           />
 
-          
-
           <ul>
             {apiResponse.postInfo.map((item) => (
               <li key={item.id}>
@@ -176,6 +170,54 @@ const UserSearch = () => {
               </li>
             ))}
           </ul>
+
+          {userFound ? (
+            <ul>
+              {apiResponse.userInfo.map((item) => (
+                <li key={item.UserID}>
+                  <div>
+                    <Divider className="my-4" />
+                    {Array.isArray(item.FullName) ? (
+                      item.FullName.map((v) => (
+                        <HighlightText key={v} value={v} highlight={searchedTerm} />
+                      ))
+                    ) : (
+                      <HighlightText
+                        key={item.FullName}
+                        value={item.FullName}
+                        highlight={searchedTerm}
+                      />
+                    )}
+                    <Divider className="my-4" />
+                    {Array.isArray(item.UserCategory) ? (
+                      item.UserCategory.map((v) => (
+                        <HighlightText key={v} value={v} highlight={searchedTerm} />
+                      ))
+                    ) : (
+                      <HighlightText
+                        key={item.UserCategory}
+                        value={item.UserCategory}
+                        highlight={searchedTerm}
+                      />
+                    )}
+                    <Divider className="my-4" />
+                    {Array.isArray(item.UserBio) ? (
+                      item.UserBio.map((v) => (
+                        <HighlightText key={v} value={v} highlight={searchedTerm} />
+                      ))
+                    ) : (
+                      <HighlightText
+                        key={item.UserBio}
+                        value={item.UserBio}
+                        highlight={searchedTerm}
+                      />
+                    )}
+                    <Divider className="my-4" />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
       ) : null}
     </div>
