@@ -1,26 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 const RegistrationForm = () => {
-  const { handleSubmit, control, errors } = useForm();
+  const { handleSubmit: handleFormSubmit, control, errors, register } = useForm();
+  const [error, setError] = useState("");
 
   // Function to handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (formData) => {
+    const { email: Email, password: Password, FullName } = formData;
+    const dataToSend = { Email, Password, FullName }; 
 
-    const formData = {
-      email: email,
-      password: password,
-    };
+    console.log("Formdata:", formData);
 
     try {
-      const response = await fetch("/api/register", {
+      const response = await fetch("http://localhost:5001/auth/register", {
         // Use the correct API endpoint for registration
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(dataToSend),
       });
 
       if (response.ok) {
@@ -40,24 +39,31 @@ const RegistrationForm = () => {
   return (
     <div className="flex flex-col items-center justify-center main-h-screen py-2">
       <h2>Registration</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleFormSubmit((data) => onSubmit(data))}>
         <div>
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="FullName">FullName:</label>
           <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            id="FullName"
+            {...register("FullName")} // Use the corrected register function
             required
           />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="Email">Email:</label>
+          <input
+            type="email"
+            id="Email"
+            {...register("email")} // Use the corrected register function
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="Password">Password:</label>
           <input
             type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            id="Password"
+            {...register("password")} // Use the corrected register function
             required
           />
         </div>
