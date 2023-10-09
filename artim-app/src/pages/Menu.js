@@ -23,7 +23,7 @@ export default function Menu() {
               className="flex items-center gap-2 text-purple-500"
             >
               <BiSolidUserCheck className="text-xl" />
-              <span className="font-bold">LOGOUT</span>
+              <span className="font-bold">Log Out</span>
             </Link>
           </>
         ) : (
@@ -33,31 +33,31 @@ export default function Menu() {
               className="flex items-center gap-2 text-teal-400"
             >
               <BiSolidUserX className="text-xl" />
-              <span className="font-bold">LOGIN</span>
+              <span className="font-bold">Log In</span>
             </Link>
             <Link
               href="/registration"
               className="flex items-center gap-2 text-teal-400"
             >
               <BiSolidUserCircle className="text-xl" />
-              <span className="font-bold">REGISTER</span>
+              <span className="font-bold">Sign Up</span>
             </Link>
           </>
         )}
 
         <Link href="/" className="flex items-center gap-2 text-teal-400">
           <AiFillHome className="text-xl" />
-          <span className="font-bold">HOME</span>
+          <span className="font-bold">Home</span>
         </Link>
 
         <Link href="/search" className="flex items-center gap-2 text-teal-400">
           <BsSearchHeart className="text-xl" />
-          <span className="font-bold">SEARCH</span>
+          <span className="font-bold">Explore</span>
         </Link>
 
         <Link className="flex items-center gap-2 text-teal-400" href="/posts">
           <TfiLayoutListPost className="text-xl" />
-          <span className="font-bold">CREATE POST</span>
+          <span className="font-bold">Create</span>
         </Link>
       </div>
     </header>

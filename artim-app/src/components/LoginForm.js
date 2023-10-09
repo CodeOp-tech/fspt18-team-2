@@ -28,7 +28,7 @@ function LoginForm() {
     console.log("FormData", formData);
 
     try {
-      const response = await fetch("http://localhost:5001/auth/login", {
+      const response = await fetch("http://localhost:5001/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,24 +108,21 @@ function LoginForm() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200 mb-4"
+                className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200 mb-6"
               />
             </div>
             <button
               type="submit"
-              className="bg-yellow-300 text-white font-extrabold py-2 px-4 rounded-md hover:bg-yellow-500 w-full mb-6"
+              className="bg-yellow-300 text-white font-extrabold py-2 px-4 rounded-md hover:bg-yellow-500 w-full mb-8"
             >
               Log In
             </button>
           </form>
         )}
-        {error && <p className="error-message">{error}</p>}
+        {error && <p className="error-message text-red-500 mb-8">{error}</p>}
 
-        <Link
-          href="/registration"
-          className="text-center gap-2 text-purple-500 "
-        >
-          <span className="font-bold">Or Sign Up</span>
+        <Link href="/registration" className="text-pink-500 ">
+          <span className="font-bold mb-8">Or Sign Up</span>
         </Link>
       </div>
     </div>
