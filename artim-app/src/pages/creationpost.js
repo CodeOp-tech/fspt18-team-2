@@ -1,7 +1,7 @@
 import { useState } from "react";
 import dynamic from 'next/dynamic';
 import toast from 'react-hot-toast';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 var Editor = dynamic(() => import("../components/Editor"), {
   ssr: false
@@ -11,7 +11,6 @@ export default function CreationPost() {
   const router = useRouter()
   const [error, setError] = useState("");
   const [post, setPost] = useState({
-    userID: 1,
     title: "",
     category: "",
     body: "",
@@ -44,25 +43,25 @@ export default function CreationPost() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
         body: JSON.stringify({
-          userID: 1,
-          title: post.title,
-          category: post.category,
-          body: post.body,
-          image1: post.image1,
-          image2: post.image2,
-          image3: post.image3,
-          video: post.video,
+          Title: post.title,
+          Category: post.category,
+          Body: post.body,
+          Image1: post.image1,
+          Image2: post.image2,
+          Image3: post.image3,
+          Video: post.video,
         }),
       });
-
+      //console.log("post---->", post);
+      //console.log("response---->", response);
       
       if (response.ok) {
         const posts = await response.json();
         toast.success("You've created a blog post");
         setPost({
-          userID: 1,
           title: "",
           category: "",
           body: "",

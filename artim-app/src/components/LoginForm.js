@@ -43,15 +43,15 @@ function LoginForm() {
         const data = await response.json();
         const { token } = data;
 
-        console.log(token);
+        // Set the localStorage to access token in all app
+        localStorage.setItem("token", token);
 
         // Set the token in the state
         login(token);
        
 
-
         console.log("User logged in successfully");
-        console.log("Token:", token);
+        console.log("token--->", token);
       } else {
         // Handle login error
         const errorData = await response.json();

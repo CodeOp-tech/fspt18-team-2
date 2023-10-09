@@ -4,9 +4,22 @@ import { TfiLayoutListPost } from "react-icons/tfi";
 import { AiFillHome } from "react-icons/ai";
 import { BiSolidUserCircle, BiSolidUserX, BiSolidUserCheck } from "react-icons/bi";
 import { useAuth } from "../components/AuthContext";
+import toast from 'react-hot-toast';
+import { useRouter } from "next/router";
 
 export default function Menu() {
   const { isLogged } = useAuth();
+  const router = useRouter();
+
+  const GoToCreatePostClick = () => {
+    if (isLogged) 
+      router.push("/creationpost");
+    else
+    {
+      toast.error("You must be logged in to create a post.");
+      router.push("#");
+    }
+  }
 
   return (
     <header className="p-4 shadow-md">
@@ -45,8 +58,12 @@ export default function Menu() {
           <BsSearchHeart />
           <span>SEARCH</span>
         </Link>
-
         
+        <a className="flex items-center gap-2" href="#" onClick={GoToCreatePostClick} >
+          <TfiLayoutListPost />
+          <span>CREATE POST</span>
+        </a>
+
       </div>
     </header>
   );
