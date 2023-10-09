@@ -30,6 +30,11 @@ export default function Menu() {
               <BiSolidUserCheck />
               <span>LOGOUT</span>
             </Link>
+            
+            <Link className="flex items-center gap-2" href="/posts">
+          <TfiLayoutListPost />
+          <span>CREATE POST</span>
+        </Link>
           </>
         ) : (
           <>
@@ -58,6 +63,7 @@ export default function Menu() {
           <TfiLayoutListPost />
           <span>CREATE POST</span>
         </a>
+
       </div>
     </header>
   );

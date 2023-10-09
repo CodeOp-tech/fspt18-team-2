@@ -12,9 +12,7 @@ const public_searchRouter = require("./routes/public_search");
 const user_searchRouter = require("./routes/user_search");
 const postsRouter = require("./routes/posts");
 
-
 const app = express();
-
 
 app.use(cors());
 app.use(logger("dev"));
