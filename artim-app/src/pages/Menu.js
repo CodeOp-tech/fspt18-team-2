@@ -9,9 +9,20 @@ import {
   BiSolidUserCheck,
 } from "react-icons/bi";
 import { useAuth } from "../components/AuthContext";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 export default function Menu() {
   const { isLogged } = useAuth();
+  const router = useRouter();
+
+  const GoToCreatePostClick = () => {
+    if (isLogged) router.push("/creationpost");
+    else {
+      toast.error("You must be logged in to create a post.");
+      router.push("#");
+    }
+  };
 
   return (
     <header className="bg-white p-4 shadow-md">
@@ -24,6 +35,11 @@ export default function Menu() {
             >
               <BiSolidUserCheck className="text-xl" />
               <span className="font-bold">Log Out</span>
+            </Link>
+
+            <Link className="flex items-center gap-2" href="/posts">
+              <TfiLayoutListPost />
+              <span>CREATE POST</span>
             </Link>
           </>
         ) : (
@@ -54,6 +70,15 @@ export default function Menu() {
           <BsSearchHeart className="text-xl" />
           <span className="font-bold">Explore</span>
         </Link>
+
+        <a
+          className="flex items-center gap-2"
+          href="#"
+          onClick={GoToCreatePostClick}
+        >
+          <TfiLayoutListPost />
+          <span>CREATE POST</span>
+        </a>
 
         <Link className="flex items-center gap-2 text-teal-400" href="/posts">
           <TfiLayoutListPost className="text-xl" />

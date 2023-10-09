@@ -8,8 +8,8 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [token, setToken] = useState("");
-  const { isLogged, login, logout } = useAuth();
+
+  const { isLogged, login, logout, token } = useAuth();
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
@@ -44,14 +44,14 @@ function LoginForm() {
         const data = await response.json();
         const { token } = data;
 
-        console.log(token);
+        // Set the localStorage to access token in all app
+        localStorage.setItem("token", token);
 
         // Set the token in the state
-        setToken(token);
-        login();
+        login(token);
 
         console.log("User logged in successfully");
-        console.log("Token:", token);
+        console.log("token--->", token);
       } else {
         // Handle login error
         const errorData = await response.json();
@@ -65,8 +65,8 @@ function LoginForm() {
   };
 
   const handleLogout = () => {
-    setToken("");
     logout();
+    console.log("User Logged out!!");
   };
 
   return (

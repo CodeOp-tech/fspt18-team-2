@@ -97,7 +97,7 @@ router.get('/', async (req, res) => {
 
     const phrasePattern = /"([^"]+)"/g;
     const phrases = searched.match(phrasePattern);
-    const searchTermWithoutPhrases = searched.replace(phrasePattern, '').trim();
+    const searchTermWithoutPhrases = searched.replace(phrases, '').trim();
 
     // Searching for posts
     const postInfo = await Posts.findAll({
@@ -117,7 +117,7 @@ router.get('/', async (req, res) => {
     
     // Pagination
     const page = req.query.page || 1;
-    const limit = req.query.limit || 12;
+    const limit = req.query.limit || 4;
     const offset = (page - 1) * limit;
 
     const paginatedPostInfo = postInfo.slice(offset, offset + limit);

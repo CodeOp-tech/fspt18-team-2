@@ -6,16 +6,23 @@ import { Button } from "@nextui-org/react";
 import { BsSearchHeart } from "react-icons/bs";
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import HighlightText from "./HighlightText";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Image, Divider, Button } from "@nextui-org/react";
+import { BsSearchHeart } from "react-icons/bs";
+import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+import Pagination from "./Pagination";
+import HighlightText from "./HighlightText";
+
+
 
 const PublicSearch = () => {
   const [apiResponse, setApiResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchedTerm, setSearchedTerm] = useState("");
-  const [found, setFound] = useState("");
-  const [foundImage, setFoundImage] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [found, setfound] = useState("");
+  const [foundImage, setfoundImage] = useState("");
 
   const handleInputChange = (e) => {
     setSearchedTerm(e.target.value);
@@ -23,10 +30,11 @@ const PublicSearch = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchData();
+    setCurrentPage(1); // Reset to the first page when a new search is initiated
+    fetchData(1);
   };
 
-  const fetchData = () => {
+  const fetchData = (page = totalPages) => {
     if (searchedTerm) {
       const apiUrl = `http://localhost:5001/public_search?searched=${searchedTerm}`;
       console.log("API URL:", apiUrl);
@@ -41,7 +49,8 @@ const PublicSearch = () => {
           if (response.data.message === "Found it") {
             setfound(response.data.message);
             setApiResponse(response.data);
-            setfoundImage(response.data.postInfo[0].Image1);
+            setTotalPages(response.data.pagination.totalPages);
+            setFoundImage(response.data.postInfo[0].Image1);
           }
           setLoading(false);
         })
@@ -53,20 +62,19 @@ const PublicSearch = () => {
     }
   };
 
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+    fetchData(newPage);
+  };
+
   useEffect(() => {
-    fetchData();
-  }, [searchedTerm]);
+    fetchData(currentPage);
+  }, [searchedTerm, currentPage]);
 
   return (
-    <div className="bg-white h-screen overflow-hidden flex flex-col items-center justify-top font-alegreya-sans">
-      <div className=" text-black p-8 text-center font-alegreya-sans">
-        <h1 className="mb-2 text-5xl font-bold mx-auto text-pink-500 font-alegreya-sans mb-2">
-          Explore
-        </h1>
-        <h3 className="italic mb-12 text-neutral-500">
-          posts, categories, artists...
-        </h3>
-        <form onSubmit={handleSubmit} className="mb-4 flex">
+    <div>
+      <div className="items-center gap-4">
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Enter search term"
@@ -76,108 +84,107 @@ const PublicSearch = () => {
           />
           <Button
             fontsize="medium"
-            color="yellow"
-            aria-label="like"
+            color="danger"
+            aria-label="Like"
             shadow="lg"
             endContent={<BsSearchHeart />}
             type="submit"
-            className="bg-amber-300 text-white font-extrabold rounded-lg hover:bg-teal-500 ml-2"
           >
-            Search
+            SEARCH
           </Button>
         </form>
         {foundImage && (
           <Image src={foundImage} shadow="lg" layout="responsive" isZoomed />
         )}
-
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p className="text-red-500">Error: {error.message}</p>
-        ) : found ? (
-          <div>
-            <div className="flex items-center gap-2 text-teal-400">
-              {apiResponse.message} <IoCheckmarkDoneCircleSharp />
-            </div>
-
-            <ul>
-              {apiResponse.postInfo.map((item) => (
-                <li key={item.id}>
-                  <div>
-                    <Divider className="my-4" />
-                    {Array.isArray(item.Title) ? (
-                      item.Title.map((v) => (
-                        <HighlightText
-                          key={v}
-                          value={v}
-                          highlight={searchedTerm}
-                        />
-                      ))
-                    ) : (
-                      <HighlightText
-                        key={item.Title}
-                        value={item.Title}
-                        highlight={searchedTerm}
-                      />
-                    )}
-                    <Divider className="my-4" />
-                    <Image
-                      src={item.Image1}
-                      alt={item.Title}
-                      shadow="lg"
-                      layout="responsive"
-                      isZoomed
-                    />
-                    {Array.isArray(item.Category) ? (
-                      item.Category.map((v) => (
-                        <HighlightText
-                          key={v}
-                          value={v}
-                          highlight={searchedTerm}
-                        />
-                      ))
-                    ) : (
-                      <HighlightText
-                        key={item.Category}
-                        value={item.Category}
-                        highlight={searchedTerm}
-                      />
-                    )}
-                    <Divider className="my-4" />
-                    {Array.isArray(item.Body) ? (
-                      item.Body.map((v) => (
-                        <HighlightText
-                          key={v}
-                          value={v}
-                          highlight={searchedTerm}
-                        />
-                      ))
-                    ) : (
-                      <HighlightText
-                        key={item.Body}
-                        value={item.Body}
-                        highlight={searchedTerm}
-                      />
-                    )}
-                    <Divider className="my-4" />
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            <div>
-              <p>Pagination:</p>
-              <p>Page: {apiResponse.pagination.page}</p>
-              <p>Limit: {apiResponse.pagination.limit}</p>
-              <p>
-                Total Post Info Count:{" "}
-                {apiResponse.pagination.totalPostInfoCount}
-              </p>
-            </div>
-          </div>
-        ) : null}
       </div>
+
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error.message}</p>
+      ) : found ? (
+        <div>
+          <div className="flex items-center gap-2">
+            {apiResponse.message} <IoCheckmarkDoneCircleSharp />
+          </div>
+
+          <ul>
+            {apiResponse.postInfo.map((item) => (
+              <li key={item.id}>
+                <div>
+                  <Divider className="my-4" />
+                  {Array.isArray(item.Title) ? (
+                    item.Title.map((v) => (
+                      <HighlightText
+                        key={v}
+                        value={v}
+                        highlight={searchedTerm}
+                      />
+                    ))
+                  ) : (
+                    <HighlightText
+                      key={item.Title}
+                      value={item.Title}
+                      highlight={searchedTerm}
+                    />
+                  )}
+                  <Divider className="my-4" />
+                  <Image
+                    src={item.Image1}
+                    alt={item.Title}
+                    shadow="lg"
+                    layout="responsive"
+                    isZoomed
+                  />
+                  {Array.isArray(item.Category) ? (
+                    item.Category.map((v) => (
+                      <HighlightText
+                        key={v}
+                        value={v}
+                        highlight={searchedTerm}
+                      />
+                    ))
+                  ) : (
+                    <HighlightText
+                      key={item.Category}
+                      value={item.Category}
+                      highlight={searchedTerm}
+                    />
+                  )}
+                  <Divider className="my-4" />
+                  {Array.isArray(item.Body) ? (
+                    item.Body.map((v) => (
+                      <HighlightText
+                        key={v}
+                        value={v}
+                        highlight={searchedTerm}
+                      />
+                    ))
+                  ) : (
+                    <HighlightText
+                      key={item.Body}
+                      value={item.Body}
+                      highlight={searchedTerm}
+                    />
+                  )}
+                  <Divider className="my-4" />
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <div>
+            <p>Pagination:</p>
+            <p>Page: {apiResponse.pagination.page}</p>
+            <p>Limit: {apiResponse.pagination.limit}</p>
+            <p>
+              Total Post Info Count: {apiResponse.pagination.totalPostInfoCount}
+            </p>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };
+
 export default PublicSearch;

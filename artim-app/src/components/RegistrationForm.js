@@ -1,16 +1,21 @@
 import React, { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
 
-function RegistrationForm() {
-  // State to manage form input values
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState(""); // Add state for full name
-  const [error, setError] = useState(null);
+const RegistrationForm = () => {
+  const {
+    handleSubmit: handleFormSubmit,
+    control,
+    errors,
+    register,
+  } = useForm();
+  const [error, setError] = useState("");
 
   // Function to handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (formData) => {
+    const { email: Email, password: Password, FullName } = formData;
+    const dataToSend = { Email, Password, FullName };
 
+    console.log("Formdata:", formData);
     const formData = {
       email: email,
       password: password,
@@ -18,13 +23,13 @@ function RegistrationForm() {
     };
 
     try {
-      const response = await fetch("/api/register", {
+      const response = await fetch("http://localhost:5001/auth/register", {
         // Use the correct API endpoint for registration
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(dataToSend),
       });
 
       if (response.ok) {
@@ -101,6 +106,6 @@ function RegistrationForm() {
       </div>
     </div>
   );
-}
+};
 
 export default RegistrationForm;

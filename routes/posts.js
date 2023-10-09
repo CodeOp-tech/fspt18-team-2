@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
+const { authenticate } = require("../secretInfo/verifyToken")
 
 /* GET posts. */
 router.get("/", async (req, res) => {
@@ -34,12 +35,14 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  //console.log(req.body);
+router.post("/", authenticate, async (req, res) => {
+  
   try {
-    await db(`INSERT INTO Posts(UserID, Title, Category, Body, Image1, Image2, Image3, Video) 
-    VALUES (${req.body.userID}, '${req.body.title}', '${req.body.category}', '${req.body.body}', '${req.body.image1}', '${req.body.image2}', '${req.body.image3}', '${req.body.video}');`);
-
+    console.log("req.userId--->", req.userId);
+    //console.log("req.body--->", req.body);
+    await db(`INSERT INTO Posts(UserId, Title, Category, Body, Image1, Image2, Image3, Video) 
+    VALUES (${req.userId}, '${req.body.Title}', '${req.body.Category}', '${req.body.Body}', '${req.body.Image1}', '${req.body.Image2}', '${req.body.Image3}', '${req.body.Video}');`);
+    
     const result = await db(`SELECT * FROM Posts;`);
 
     if (!result.data[0]) {
