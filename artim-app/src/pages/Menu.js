@@ -27,53 +27,42 @@ export default function Menu() {
   return (
     <header className="bg-white p-4 shadow-md">
       <div className="container mx-auto flex gap-6 justify-end">
+      <Link href="/" className="flex items-center gap-2 text-neutral-700">
+          <AiFillHome />
+          <span>Home</span>
+        </Link>
+
+        <Link href="/search" className="flex items-center gap-2 text-neutral-700">
+          <BsSearchHeart />
+          <span>Explore</span>
+        </Link>
+        
+        <a className="flex items-center gap-2" href="#" onClick={GoToCreatePostClick} >
+          <TfiLayoutListPost />
+          <span>Create Post</span>
+        </a>
+        
         {isLogged ? (
           <>
-            <Link
-              href="/login"
-              className="flex items-center gap-2 text-pink-700"
-            >
+            <Link href="/login" className="flex items-center gap-2 text-pink-700">
               <BiSolidUserCheck />
               <span className="font-bold">Log Out</span>
-            </Link>
-
-            <Link className="flex items-center gap-2  text-neutral-700"
-              href="/creationpost">
-              <TfiLayoutListPost />
-              <span className="font-bold">CREATE POST</span>
             </Link>
           </>
         ) : (
           <>
-            <Link
-              href="/login"
-              className="flex items-center gap-2 text-teal-400"
-            >
+            <Link href="/login" 
+            className="flex items-center gap-2 text-teal-400">
               <BiSolidUserX />
               <span>Log In</span>
             </Link>
-            <Link
-              href="/registration"
-              className="flex items-center gap-2 text-amber-400"
-            >
+            <Link href="/registration" 
+            className="flex items-center gap-2 text-amber-400">
               <BiSolidUserCircle />
-              <span className="font-bold">Register</span>
+              <span className="font-bold">Sign up</span>
             </Link>
           </>
         )}
-
-        <Link href="/" className="flex items-center gap-2 text-neutral-700">
-          <AiFillHome />
-          <span className="font-bold">Home</span>
-        </Link>
-
-        <Link
-          href="/search"
-          className="flex items-center gap-2 text-neutral-700"
-        >
-          <BsSearchHeart />
-          <span className="font-bold">Explore</span>
-        </Link>
       </div>
     </header>
   );

@@ -6,7 +6,7 @@ import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import Pagination from "./Pagination";
 import HighlightText from "./HighlightText";
 
-
+const logoSrc = "../public/logo/logo.png";
 
 
   const PublicSearch = () => {
@@ -68,12 +68,11 @@ import HighlightText from "./HighlightText";
 
   return (
     <div className="bg-white h-screen flex-col items-center justify-top font-alegreya-sans">
-      <div className=" text-black p-8 text-center font-alegreya-sans  drop-shadow-md ">
-        
+      <div className=" text-black p-8 text-center font-alegreya-sans drop-shadow-md ">
+        {/* Display the logo */}
       <div>
-
+        
         { <Image src="/logo/logo.png" alt="Logo" width={50} height={50} /> }
-
 
         <h1 className="mb-2 text-5xl font-bold mx-auto text-pink-500 font-alegreya-sans ">
           Explore
@@ -82,9 +81,6 @@ import HighlightText from "./HighlightText";
           posts, categories, artists...
         </h3>
         </div>
-
-
-
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -101,22 +97,15 @@ import HighlightText from "./HighlightText";
             endContent={<BsSearchHeart />}
             type="submit"
             className="bg-amber-300 text-white font-extrabold rounded-lg hover:bg-amber-500 ml-2"
-          ></Button>
+          >
+           Search
+          </Button>
         </form>
-
-
-
-
-
 
         {foundImage && (
         
             <Image src={foundImage} width={100} height={100} shadow="lg" layout="responsive" isZoomed />
         )}
-
-
-
-
       </div>
 
       {loading ? (
@@ -142,8 +131,6 @@ import HighlightText from "./HighlightText";
             totalPages={totalPages}
             onPageChange={handlePageChange}
           />
-
-              
               <div className="flex-col items-center ">
           <ul>
             {apiResponse.postInfo.map((item) => (
@@ -172,7 +159,6 @@ import HighlightText from "./HighlightText";
                     shadow="lg"
                     layout="responsive"
                     isZoomed
-                    
                   />
                   {Array.isArray(item.Category) ? (
                     item.Category.map((v) => (
@@ -212,9 +198,6 @@ import HighlightText from "./HighlightText";
           </ul>
 
               </div>
-
-
-
 
         </div>
       ) : null}

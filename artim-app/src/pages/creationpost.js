@@ -82,26 +82,33 @@ export default function CreationPost() {
   };
 
   return (
-    <div className="p-10">
-      <main>
-        <form className="p-8 border border-solid text-center" onSubmit={(e) => handleSubmit(e)}>
-        <h1 className="p-8 text-xl">New post</h1>
-          <div className="p-2">
-            <label className="pr-8" htmlFor="title">Title</label>
-            <input className="border border-solid"
+    <div className="bg-white min-h-screen overflow-hidden flex items-center justify-center font-alegreya-sans">
+      <div className="rounded-lg bg-neutral-100 lg:w-6/12 md:9/12 w-12/12 shadow-2xl text-black p-8 text-center font-alegreya-sans">
+      <h2 className=" drop-shadow-md text-5xl font-bold mx-auto text-teal-400 font-alegreya-sans">New post!</h2>
+      <h3 className="italic mb-12 text-neutral-500">
+          Write your article
+        </h3>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div className="mb-4">
+            <label className="block mb-1 text-left" htmlFor="title">Title</label>
+            <input 
               type="text"
               name="title"
               value={post.title}
               onChange={(e) => handleChange(e)}
+              required
+              className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200"
             />
           </div>
-          <div className="p-2">
-            <label className="pr-8" htmlFor="category">Category</label>
-            <select className="border border-solid"
+          <div className="mb-4">
+            <label className="block mb-1 text-left" htmlFor="category">Category</label>
+            <select
               name="category"
               id="category"
               value={post.category}
               onChange={(e) => handleChange(e)}
+              required 
+              className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200"
             >
               <option value="">Choose category</option>
               <option value="Traditional Art">Traditional Art</option>
@@ -109,51 +116,57 @@ export default function CreationPost() {
               <option value="Audiovisual">Audiovisual</option>
             </select>
           </div>
-          <div className="p-2">
-            <label htmlFor="body">Article</label>
-            <div className="py-2 px-28">
+          <div className="mb-4">
+            <label className="block mb-1 text-left" htmlFor="body">Article</label>
+            <div className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200">
             <Editor onEditorChange={(content) => setPost({ ...post, body: content })} />
             </div>
           </div>
-          <div className="p-2">
-            <label className="pr-8" htmlFor="image1">Image 1</label>
-            <input className="border border-solid"
+          <div className="mb-4">
+            <label className="block mb-1 text-left" htmlFor="image1">Image 1</label>
+            <input
               type="text"
               name="image1"
               value={post.image1}
               onChange={(e) => handleChange(e)}
+              required
+              className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200"
             />
           </div>
-          <div className="p-2">
-            <label className="pr-8" htmlFor="image2">Image 2</label>
-            <input className="border border-solid"
+          <div className="mb-4">
+            <label className="block mb-1 text-left" htmlFor="image2">Image 2</label>
+            <input 
               type="text"
               name="image2"
               value={post.image2}
               onChange={(e) => handleChange(e)}
+              className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200"
             />
           </div>
-          <div className="p-2">
-            <label className="pr-8" htmlFor="image 3">Image 3</label>
-            <input className="border border-solid"
+          <div className="mb-4">
+            <label className="block mb-1 text-left" htmlFor="image 3">Image 3</label>
+            <input 
               type="text"
               name="image3"
               value={post.image3}
               onChange={(e) => handleChange(e)}
+              className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200"
             />
           </div>
-          <div className="p-2">
-            <label className="pr-8" htmlFor="video">Video</label>
-            <input className="border border-solid"
+          <div className="mb-4">
+            <label className="block mb-1 text-left" htmlFor="video">Video</label>
+            <input 
               type="text"
               name="video"
               value={post.video}
               onChange={(e) => handleChange(e)}
+              className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200"
             />
           </div>
-          <button className="m-14 px-2 py-1 border border-solid rounded-lg" type="submit">submit</button>
+          <button className="bg-yellow-300 text-white font-extrabold py-2 px-4 rounded-md hover:bg-yellow-500 w-full mb-8" type="submit">submit</button>
         </form>
-      </main>
+      
+      </div>
     </div>
   );
 }
