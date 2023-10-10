@@ -6,10 +6,7 @@ import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import Pagination from "./Pagination";
 import HighlightText from "./HighlightText";
 
-
-
-
-  const PublicSearch = () => {
+const PublicSearch = () => {
   const [apiResponse, setApiResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -20,11 +17,11 @@ import HighlightText from "./HighlightText";
   const [totalPages, setTotalPages] = useState(1);
 
   const handleInputChange = (e) => {
-    setSearchedTerm(e.target.value); 
+    setSearchedTerm(e.target.value);
   };
 
-    const handleSubmit = (e) => {
-     e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     setCurrentPage(1); // Reset to the first page when a new search is initiated
     fetchData(1);
   };
@@ -69,21 +66,16 @@ import HighlightText from "./HighlightText";
   return (
     <div className="bg-white h-screen flex-col items-center justify-top font-alegreya-sans">
       <div className=" text-black p-8 text-center font-alegreya-sans  drop-shadow-md ">
-        
-      <div>
+        <div>
+          {<Image src="/logo/logo.png" alt="Logo" width={50} height={50} />}
 
-       
-
-
-        <h1 className="mb-2 text-5xl font-bold mx-auto text-pink-500 font-alegreya-sans ">
-          Explore
-        </h1>
-        <h3 className="italic mb-12 text-neutral-500">
-          posts, categories, artists...
-        </h3>
+          <h1 className="mb-2 text-5xl font-bold mx-auto text-pink-500 font-alegreya-sans ">
+            Explore
+          </h1>
+          <h3 className="italic mb-12 text-neutral-500">
+            posts, categories, artists...
+          </h3>
         </div>
-
-
 
         <form onSubmit={handleSubmit}>
           <input
@@ -101,22 +93,21 @@ import HighlightText from "./HighlightText";
             endContent={<BsSearchHeart />}
             type="submit"
             className="bg-amber-300 text-white font-extrabold rounded-lg hover:bg-amber-500 ml-2"
-          ></Button>
+          >
+            Search
+          </Button>
         </form>
 
-
-
-
-
-
         {foundImage && (
-        
-            <Image src={foundImage} width={100} height={100} shadow="lg" layout="responsive" isZoomed />
+          <Image
+            src={foundImage}
+            width={100}
+            height={100}
+            shadow="lg"
+            layout="responsive"
+            isZoomed
+          />
         )}
-
-
-
-
       </div>
 
       {loading ? (
@@ -129,7 +120,7 @@ import HighlightText from "./HighlightText";
             {apiResponse.message} <IoCheckmarkDoneCircleSharp />
           </div>
 
-              { /*<Divider className="my-4" />
+          {/*<Divider className="my-4" />
           <div className="flex gap-6 justify-end">
             <h2>Pagination:</h2>
             <h4>Total Pages: {apiResponse.pagination.page}</h4>
@@ -143,79 +134,72 @@ import HighlightText from "./HighlightText";
             onPageChange={handlePageChange}
           />
 
-              
-              <div className="flex-col items-center ">
-          <ul>
-            {apiResponse.postInfo.map((item) => (
-              <li key={item.id}>
-                <div>
-                  <Divider className="my-4" />
-                  {Array.isArray(item.Title) ? (
-                    item.Title.map((v) => (
+          <div className="flex-col items-center ">
+            <ul>
+              {apiResponse.postInfo.map((item) => (
+                <li key={item.id}>
+                  <div>
+                    <Divider className="my-4" />
+                    {Array.isArray(item.Title) ? (
+                      item.Title.map((v) => (
+                        <HighlightText
+                          key={v}
+                          value={v}
+                          highlight={searchedTerm}
+                        />
+                      ))
+                    ) : (
                       <HighlightText
-                        key={v}
-                        value={v}
+                        key={item.Title}
+                        value={item.Title}
                         highlight={searchedTerm}
                       />
-                    ))
-                  ) : (
-                    <HighlightText
-                      key={item.Title}
-                      value={item.Title}
-                      highlight={searchedTerm}
+                    )}
+                    <Divider className="my-4" />
+                    <Image
+                      src={item.Image1}
+                      alt={item.Title}
+                      shadow="lg"
+                      layout="responsive"
+                      isZoomed
                     />
-                  )}
-                  <Divider className="my-4" />
-                  <Image
-                    src={item.Image1}
-                    alt={item.Title}
-                    shadow="lg"
-                    layout="responsive"
-                    isZoomed
-                    
-                  />
-                  {Array.isArray(item.Category) ? (
-                    item.Category.map((v) => (
+                    {Array.isArray(item.Category) ? (
+                      item.Category.map((v) => (
+                        <HighlightText
+                          key={v}
+                          value={v}
+                          highlight={searchedTerm}
+                        />
+                      ))
+                    ) : (
                       <HighlightText
-                        key={v}
-                        value={v}
+                        key={item.Category}
+                        value={item.Category}
                         highlight={searchedTerm}
                       />
-                    ))
-                  ) : (
-                    <HighlightText
-                      key={item.Category}
-                      value={item.Category}
-                      highlight={searchedTerm}
-                    />
-                  )}
-                  <Divider className="my-4" />
-                  {Array.isArray(item.Body) ? (
-                    item.Body.map((v) => (
+                    )}
+                    <Divider className="my-4" />
+                    {Array.isArray(item.Body) ? (
+                      item.Body.map((v) => (
+                        <HighlightText
+                          key={v}
+                          value={v}
+                          highlight={searchedTerm}
+                        />
+                      ))
+                    ) : (
                       <HighlightText
-                        key={v}
-                        value={v}
+                        key={item.Body}
+                        value={item.Body}
                         highlight={searchedTerm}
                       />
-                    ))
-                  ) : (
-                    <HighlightText
-                      key={item.Body}
-                      value={item.Body}
-                      highlight={searchedTerm}
-                    />
-                  )}
-                  <Divider className="my-4" />
-                </div>
-              </li>
-            ))}
-          </ul>
-
-              </div>
-
-
-
-
+                    )}
+                    <Divider className="my-4" />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       ) : null}
     </div>
@@ -223,6 +207,3 @@ import HighlightText from "./HighlightText";
 };
 
 export default PublicSearch;
-
-
-

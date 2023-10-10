@@ -31,20 +31,15 @@ const RegistrationForm = () => {
 
       if (response.ok) {
         // Registration was successful
-        console.log("Response", response);
         console.log("Registration successful");
         setRegistered(true);
       } else {
         // Handle registration error
         const errorData = await response.json();
-        if (errorData.message === 'You already have an account, please login') {
-          setError('Email already exists. Please use a different email.');
-        } else {
-          setError(errorData.message || "An error occurred during registration.");
-        }
+        setError(errorData.message || "An error occurred during registration.");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error:", errors);
       setError("An unexpected error occurred.");
     }
   };
@@ -55,7 +50,7 @@ const RegistrationForm = () => {
         <div className="rounded-lg bg-amber-200 lg:w-6/12 md:9/12 w-12/12 shadow-2xl text-black p-8 text-center font-alegreya-sans">
           {!registered && (
             <div>
-              <h2 className="drop-shadow-md text-5xl font-bold mx-auto text-pink-500 font-alegreya-sans">
+              <h2 className=" drop-shadow-md text-5xl font-bold mx-auto text-pink-500 font-alegreya-sans">
                 Hello friend
               </h2>
               <h3 className="italic mb-12 text-neutral-500">
@@ -108,12 +103,13 @@ const RegistrationForm = () => {
               {error && <p className="error-message">{error}</p>}
             </div>
           )}
-
+          ;
           {registered && (
             <div className="bg-white block w-full rounded-md py-2 px-3 border border-gray-400 focus:border-teal-100 focus:ring focus:ring-teal-200 drop-shadow-lg">
               <Link href="/login" className="text-pink-500 ">
                 <span className="font-bold mb-8 hover:text-pink-700">
-                  Please Login!
+                  {" "}
+                  Please Login!{" "}
                 </span>
               </Link>
             </div>
