@@ -11,6 +11,7 @@ import {
 import { useAuth } from "../components/AuthContext";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { Image } from "@nextui-org/react";
 
 export default function Menu() {
   const { isLogged } = useAuth();
@@ -25,8 +26,12 @@ export default function Menu() {
   };
 
   return (
-    <header className="bg-white p-4 shadow-md">
+    <header className="bg-white gap-6  p-4 shadow-md">
+      
+      <div className="container mx-auto flex justify-start"> {<Image  src="/logo/logo.png" alt="Logo" width={70} height={70} />}</div>
+      
       <div className="container mx-auto flex gap-6 justify-end">
+      
         {isLogged ? (
           <>
             <Link
@@ -75,6 +80,9 @@ export default function Menu() {
           <span className="font-bold">Explore</span>
         </Link>
       </div>
+
+      
+
     </header>
   );
 }

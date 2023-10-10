@@ -20,11 +20,11 @@ import HighlightText from "./HighlightText";
   const [totalPages, setTotalPages] = useState(1);
 
   const handleInputChange = (e) => {
-    setSearchedTerm(e.target.value);
+    setSearchedTerm(e.target.value); 
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const handleSubmit = (e) => {
+     e.preventDefault();
     setCurrentPage(1); // Reset to the first page when a new search is initiated
     fetchData(1);
   };
@@ -72,7 +72,7 @@ import HighlightText from "./HighlightText";
         
       <div>
 
-        { <Image src="/logo/logo.png" alt="Logo" width={50} height={50} /> }
+       
 
 
         <h1 className="mb-2 text-5xl font-bold mx-auto text-pink-500 font-alegreya-sans ">
