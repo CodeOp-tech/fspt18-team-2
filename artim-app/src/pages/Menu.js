@@ -22,47 +22,42 @@ export default function Menu() {
   }
 
   return (
-    <header className="p-4 shadow-md">
-      <div className="flex gap-6 justify-end">
-        {isLogged ? (
-          <>
-            <Link href="/login" className="flex items-center gap-2">
-              <BiSolidUserCheck />
-              <span>LOGOUT</span>
-            </Link>
-            
-            <Link className="flex items-center gap-2" href="/posts">
-          <TfiLayoutListPost />
-          <span>CREATE POST</span>
-        </Link>
-          </>
-        ) : (
-          <>
-            <Link href="/login" className="flex items-center gap-2">
-              <BiSolidUserX />
-              <span>LOGIN</span>
-            </Link>
-            <Link href="/registration" className="flex items-center gap-2">
-              <BiSolidUserCircle />
-              <span>REGISTER</span>
-            </Link>
-          </>
-        )}
-
-        <Link href="/" className="flex items-center gap-2">
+    <header className="bg-white p-4 shadow-md">
+      <div className="container mx-auto flex gap-6 justify-end">
+      <Link href="/" className="flex items-center gap-2 text-neutral-700">
           <AiFillHome />
-          <span>HOME</span>
+          <span>Home</span>
         </Link>
 
-        <Link href="/search" className="flex items-center gap-2">
+        <Link href="/search" className="flex items-center gap-2 text-neutral-700">
           <BsSearchHeart />
-          <span>SEARCH</span>
+          <span>Explore</span>
         </Link>
         
         <a className="flex items-center gap-2" href="#" onClick={GoToCreatePostClick} >
           <TfiLayoutListPost />
-          <span>CREATE POST</span>
+          <span>Create Post</span>
         </a>
+        
+        {isLogged ? (
+          <>
+            <Link href="/login" className="flex items-center gap-2 text-pink-700">
+              <BiSolidUserCheck />
+              <span className="font-bold">Log Out</span>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link href="/login" className="flex items-center gap-2 text-teal-400">
+              <BiSolidUserX />
+              <span>Log In</span>
+            </Link>
+            <Link href="/registration" className="flex items-center gap-2 text-amber-400">
+              <BiSolidUserCircle />
+              <span>Register</span>
+            </Link>
+          </>
+        )}
 
       </div>
     </header>

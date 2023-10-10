@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Image, Divider, Button } from '@nextui-org/react';
-import { BsSearchHeart } from 'react-icons/bs';
-import { IoCheckmarkDoneCircleSharp } from 'react-icons/io5';
-import Pagination from './Pagination';
-import HighlightText from './HighlightText';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Image, Divider, Button } from "@nextui-org/react";
+import { BsSearchHeart } from "react-icons/bs";
+import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+import Pagination from "./Pagination";
+import HighlightText from "./HighlightText";
 
-
+const logoSrc = "../public/logo/logo.png";
 
 const PublicSearch = () => {
   const [apiResponse, setApiResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [searchedTerm, setSearchedTerm] = useState('');
-  const [found, setFound] = useState('');
-  const [foundImage, setFoundImage] = useState('');
+  const [searchedTerm, setSearchedTerm] = useState("");
+  const [found, setFound] = useState("");
+  const [foundImage, setFoundImage] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
- 
 
   const handleInputChange = (e) => {
     setSearchedTerm(e.target.value);
@@ -32,7 +31,7 @@ const PublicSearch = () => {
   const fetchData = (page = totalPages) => {
     if (searchedTerm) {
       const apiUrl = `http://localhost:5001/public_search?searched=${searchedTerm}&page=${page}`;
-      console.log('API URL:', apiUrl);
+      console.log("API URL:", apiUrl);
 
       setLoading(true);
       setError(null);
@@ -40,8 +39,8 @@ const PublicSearch = () => {
       axios
         .get(apiUrl)
         .then((response) => {
-          console.log('Response Data:', response.data);
-          if (response.data.message === 'Found it') {
+          console.log("Response Data:", response.data);
+          if (response.data.message === "Found it") {
             setFound(response.data.message);
             setApiResponse(response.data);
             setTotalPages(response.data.pagination.totalPages);
@@ -50,7 +49,7 @@ const PublicSearch = () => {
           setLoading(false);
         })
         .catch((err) => {
-          console.error('Error:', err);
+          console.error("Error:", err);
           setError(err);
           setLoading(false);
         });
@@ -62,31 +61,41 @@ const PublicSearch = () => {
     fetchData(newPage);
   };
 
-  
-
   useEffect(() => {
     fetchData(currentPage);
   }, [searchedTerm, currentPage]);
 
   return (
-    <div>
-      <div className="items-center gap-4">
+    <div className="bg-white h-screen overflow-hidden flex flex-col items-center justify-top font-alegreya-sans">
+      <div className=" text-black p-8 text-center font-alegreya-sans">
+        {/* Display the logo */}
+
+        <Image src={logoSrc} alt="Logo" width={50} height={50} />
+
+        <h1 className="mb-2 text-5xl font-bold mx-auto text-pink-500 font-alegreya-sans">
+          Explore
+        </h1>
+        <h3 className="italic mb-12 text-neutral-500">
+          posts, categories, artists...
+        </h3>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Enter search term"
             value={searchedTerm}
             onChange={handleInputChange}
+            className=" rounded-lg py-2 px-12 border border-gray-300 focus:border-pink-100 focus:ring focus:ring-pink-200"
           />
           <Button
             fontsize="medium"
-            color="danger"
+            color="amber"
             aria-label="Like"
             shadow="lg"
             endContent={<BsSearchHeart />}
             type="submit"
+            className="bg-amber-300 text-white font-extrabold rounded-lg hover:bg-amber-500 ml-2"
           >
-            SEARCH
+            Search
           </Button>
         </form>
         {foundImage && (
@@ -118,8 +127,6 @@ const PublicSearch = () => {
             onPageChange={handlePageChange}
           />
 
-          
-
           <ul>
             {apiResponse.postInfo.map((item) => (
               <li key={item.id}>
@@ -127,7 +134,11 @@ const PublicSearch = () => {
                   <Divider className="my-4" />
                   {Array.isArray(item.Title) ? (
                     item.Title.map((v) => (
-                      <HighlightText key={v} value={v} highlight={searchedTerm} />
+                      <HighlightText
+                        key={v}
+                        value={v}
+                        highlight={searchedTerm}
+                      />
                     ))
                   ) : (
                     <HighlightText
@@ -137,10 +148,20 @@ const PublicSearch = () => {
                     />
                   )}
                   <Divider className="my-4" />
-                  <Image src={item.Image1} alt={item.Title} shadow="lg" layout="responsive" isZoomed />
+                  <Image
+                    src={item.Image1}
+                    alt={item.Title}
+                    shadow="lg"
+                    layout="responsive"
+                    isZoomed
+                  />
                   {Array.isArray(item.Category) ? (
                     item.Category.map((v) => (
-                      <HighlightText key={v} value={v} highlight={searchedTerm} />
+                      <HighlightText
+                        key={v}
+                        value={v}
+                        highlight={searchedTerm}
+                      />
                     ))
                   ) : (
                     <HighlightText
@@ -152,7 +173,11 @@ const PublicSearch = () => {
                   <Divider className="my-4" />
                   {Array.isArray(item.Body) ? (
                     item.Body.map((v) => (
-                      <HighlightText key={v} value={v} highlight={searchedTerm} />
+                      <HighlightText
+                        key={v}
+                        value={v}
+                        highlight={searchedTerm}
+                      />
                     ))
                   ) : (
                     <HighlightText
