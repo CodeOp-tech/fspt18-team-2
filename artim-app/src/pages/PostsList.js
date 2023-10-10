@@ -19,7 +19,7 @@ export function PostsList() {
   return (
     <>
       <div className="p-10">
-        <h2 className="mt-14 mb-6 text-right text-5xl font-semibold">Find your</h2>
+        <h2 className="mt-14 mb-6 text-right text-5xl font-semibold font-alegreya-sans">Find your</h2>
         <h2 className="mb-14 text-right text-5xl font-semibold text-pink-500">inspiration</h2>
         <div className="p-8"></div>
         <div className="grid grid-cols-4 gap-6">
