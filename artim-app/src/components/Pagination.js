@@ -27,10 +27,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         color="danger"
         aria-label="Like"
         shadow="lg"
-        endContent={<LiaEyeSolid />}
         type="submit"
       >
-        Next Page <TbPlayerTrackNextFilled />
+    <LiaEyeSolid />  <TbPlayerTrackNextFilled />  Next Page 
       </Button>
     </div>
   );

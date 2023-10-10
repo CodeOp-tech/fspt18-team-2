@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
         <AuthProvider>
           <div className="app">
             <Menu />
-            <main className="max-w-screen-lg w-full mx-auto px-2 my-6">
+            <main className="max-w-screen-lg w-full mx-auto px-5 my-6">
               <Toaster />
               <Component {...pageProps} />
               <Toaster />

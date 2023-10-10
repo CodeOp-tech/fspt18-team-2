@@ -6,7 +6,7 @@ import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import Pagination from "./Pagination";
 import HighlightText from "./HighlightText";
 
-const logoSrc = "../public/logo/logo.png";
+
 
 
   const PublicSearch = () => {
@@ -20,11 +20,11 @@ const logoSrc = "../public/logo/logo.png";
   const [totalPages, setTotalPages] = useState(1);
 
   const handleInputChange = (e) => {
-    setSearchedTerm(e.target.value);
+    setSearchedTerm(e.target.value); 
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const handleSubmit = (e) => {
+     e.preventDefault();
     setCurrentPage(1); // Reset to the first page when a new search is initiated
     fetchData(1);
   };
@@ -68,11 +68,12 @@ const logoSrc = "../public/logo/logo.png";
 
   return (
     <div className="bg-white h-screen flex-col items-center justify-top font-alegreya-sans">
-      <div className=" text-black p-8 text-center font-alegreya-sans drop-shadow-md ">
-        {/* Display the logo */}
-      <div>
+      <div className=" text-black p-8 text-center font-alegreya-sans  drop-shadow-md ">
         
-        { <Image src="/logo/logo.png" alt="Logo" width={50} height={50} /> }
+      <div>
+
+       
+
 
         <h1 className="mb-2 text-5xl font-bold mx-auto text-pink-500 font-alegreya-sans ">
           Explore
@@ -81,6 +82,9 @@ const logoSrc = "../public/logo/logo.png";
           posts, categories, artists...
         </h3>
         </div>
+
+
+
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -97,15 +101,22 @@ const logoSrc = "../public/logo/logo.png";
             endContent={<BsSearchHeart />}
             type="submit"
             className="bg-amber-300 text-white font-extrabold rounded-lg hover:bg-amber-500 ml-2"
-          >
-           Search
-          </Button>
+          ></Button>
         </form>
+
+
+
+
+
 
         {foundImage && (
         
             <Image src={foundImage} width={100} height={100} shadow="lg" layout="responsive" isZoomed />
         )}
+
+
+
+
       </div>
 
       {loading ? (
@@ -131,6 +142,8 @@ const logoSrc = "../public/logo/logo.png";
             totalPages={totalPages}
             onPageChange={handlePageChange}
           />
+
+              
               <div className="flex-col items-center ">
           <ul>
             {apiResponse.postInfo.map((item) => (
@@ -159,6 +172,7 @@ const logoSrc = "../public/logo/logo.png";
                     shadow="lg"
                     layout="responsive"
                     isZoomed
+                    
                   />
                   {Array.isArray(item.Category) ? (
                     item.Category.map((v) => (
@@ -198,6 +212,9 @@ const logoSrc = "../public/logo/logo.png";
           </ul>
 
               </div>
+
+
+
 
         </div>
       ) : null}
