@@ -14,8 +14,14 @@ import { useRouter } from "next/router";
 import { Image } from "@nextui-org/react";
 
 export default function Menu() {
-  const { isLogged } = useAuth();
+  const { isLogged, logout } = useAuth();
   const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    router.push("/");
+    console.log("User Logged out!!");
+  };
 
   const GoToCreatePostClick = () => {
     if (isLogged) router.push("/creationpost");
@@ -26,27 +32,45 @@ export default function Menu() {
   };
 
   return (
-    <header className="bg-white gap-6  p-4 shadow-md">
-      
-      <div className="container mx-auto flex justify-start"> {<Image  src="/logo/logo.png" alt="Logo" width={70} height={70} />}</div>
-      
-      <div className="container mx-auto flex gap-6 justify-end">
-      
+    <header className="bg-white p-4 shadow-md">
+      <div className="container mx-auto flex gap-8 justify-end font-bold">
+        <Link href="/" className="gap-2 text-neutral-700 m-auto ml-0">
+          {
+            <Image
+              src="/logo/logo.png"
+              alt="Logo"
+              width={50}
+              height={50}
+              className="rounded-none"
+            />
+          }
+        </Link>
+        <Link
+          href="/search"
+          className="flex items-center gap-2 text-neutral-700"
+        >
+          <BsSearchHeart />
+          <span>Explore</span>
+        </Link>
+
+        <a
+          className="flex items-center gap-2 text-neutral-700"
+          href="#"
+          onClick={GoToCreatePostClick}
+        >
+          <TfiLayoutListPost />
+          <span>Create Post</span>
+        </a>
+
         {isLogged ? (
           <>
-            <Link
-              href="/login"
+            <button
               className="flex items-center gap-2 text-pink-700"
+              onClick={handleLogout}
             >
               <BiSolidUserCheck />
-              <span className="font-bold">Log Out</span>
-            </Link>
-
-            <Link className="flex items-center gap-2  text-neutral-700"
-              href="/creationpost">
-              <TfiLayoutListPost />
-              <span className="font-bold">CREATE POST</span>
-            </Link>
+              <span className="font-bold">Log Out</span>{" "}
+            </button>
           </>
         ) : (
           <>
@@ -62,27 +86,11 @@ export default function Menu() {
               className="flex items-center gap-2 text-amber-400"
             >
               <BiSolidUserCircle />
-              <span className="font-bold">Register</span>
+              <span className="font-bold">Sign up</span>
             </Link>
           </>
         )}
-
-        <Link href="/" className="flex items-center gap-2 text-neutral-700">
-          <AiFillHome />
-          <span className="font-bold">Home</span>
-        </Link>
-
-        <Link
-          href="/search"
-          className="flex items-center gap-2 text-neutral-700"
-        >
-          <BsSearchHeart />
-          <span className="font-bold">Explore</span>
-        </Link>
       </div>
-
-      
-
     </header>
   );
 }
