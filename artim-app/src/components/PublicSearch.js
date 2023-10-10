@@ -67,8 +67,6 @@ const PublicSearch = () => {
     <div className="bg-white h-screen flex-col items-center justify-top font-alegreya-sans">
       <div className=" text-black p-8 text-center font-alegreya-sans  drop-shadow-md ">
         <div>
-          {<Image src="/logo/logo.png" alt="Logo" width={50} height={50} />}
-
           <h1 className="mb-2 text-5xl font-bold mx-auto text-pink-500 font-alegreya-sans ">
             Explore
           </h1>

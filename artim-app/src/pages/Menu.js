@@ -11,10 +11,17 @@ import {
 import { useAuth } from "../components/AuthContext";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { Image } from "@nextui-org/react";
 
 export default function Menu() {
-  const { isLogged } = useAuth();
+  const { isLogged, logout } = useAuth();
   const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    router.push("/");
+    console.log("User Logged out!!");
+  };
 
   const GoToCreatePostClick = () => {
     if (isLogged) router.push("/creationpost");
@@ -27,11 +34,17 @@ export default function Menu() {
   return (
     <header className="bg-white p-4 shadow-md">
       <div className="container mx-auto flex gap-6 justify-end">
-        <Link href="/" className="flex items-center gap-2 text-neutral-700">
-          <AiFillHome />
-          <span>Home</span>
+        <Link href="/" className="gap-2 text-neutral-700 m-auto ml-0">
+          {
+            <Image
+              src="/logo/logo.png"
+              alt="Logo"
+              width={50}
+              height={50}
+              className="rounded-none"
+            />
+          }
         </Link>
-
         <Link
           href="/search"
           className="flex items-center gap-2 text-neutral-700"
@@ -51,13 +64,13 @@ export default function Menu() {
 
         {isLogged ? (
           <>
-            <Link
-              href="/login"
+            <button
               className="flex items-center gap-2 text-pink-700"
+              onClick={handleLogout}
             >
               <BiSolidUserCheck />
-              <span className="font-bold">Log Out</span>
-            </Link>
+              <span className="font-bold">Log Out</span>{" "}
+            </button>
           </>
         ) : (
           <>
