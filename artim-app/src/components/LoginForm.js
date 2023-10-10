@@ -94,7 +94,6 @@ function LoginForm() {
             </p>
           </div>
         )}
-
         {isLogged ? (
           <div>
             <p className="success-message">Logged in successfully!</p>
@@ -104,7 +103,6 @@ function LoginForm() {
             >
               Logout
             </button>
-
             <div className="block w-full rounded-md py-2 px-3 border border-gray-400 focus:border-teal-100 focus:ring focus:ring-teal-200 drop-shadow-lg">
               <Link href="/" className="text-pink-500 ">
                 <span className="font-bold mb-8 hover:text-pink-700">
@@ -129,12 +127,25 @@ function LoginForm() {
                 className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200"
               />
             </div>
-
-            <h2>Login</h2>
-            <p className="italic mb-12 text-neutral-500">
-              {" "}
-              If you already have an account!{" "}
-            </p>
+            <div>
+              <label htmlFor="password" className="block mb-1 text-left">
+                Password:
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200 mb-6"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-yellow-300 text-white font-extrabold py-2 px-4 rounded-md hover:bg-yellow-500 w-full mb-8 drop-shadow-md"
+            >
+              Login
+            </button>
           </form>
         )}
         {error && <p className="error-message text-red-700 mb-6">{error}</p>}

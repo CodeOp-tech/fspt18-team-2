@@ -103,7 +103,6 @@ const RegistrationForm = () => {
               {error && <p className="error-message">{error}</p>}
             </div>
           )}
-          ;
           {registered && (
             <div className="bg-white block w-full rounded-md py-2 px-3 border border-gray-400 focus:border-teal-100 focus:ring focus:ring-teal-200 drop-shadow-lg">
               <Link href="/login" className="text-pink-500 ">
