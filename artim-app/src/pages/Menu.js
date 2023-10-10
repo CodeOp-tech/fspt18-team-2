@@ -33,7 +33,7 @@ export default function Menu() {
 
   return (
     <header className="bg-white p-4 shadow-md">
-      <div className="container mx-auto flex gap-6 justify-end">
+      <div className="container mx-auto flex gap-8 justify-end font-bold">
         <Link href="/" className="gap-2 text-neutral-700 m-auto ml-0">
           {
             <Image
@@ -54,7 +54,7 @@ export default function Menu() {
         </Link>
 
         <a
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 text-neutral-700"
           href="#"
           onClick={GoToCreatePostClick}
         >
