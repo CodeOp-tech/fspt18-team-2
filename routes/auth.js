@@ -53,7 +53,7 @@ mysql> Show tables;
 | ArtCategories  |
 | Posts             |
 +-------------------+
-git push https://github.com/CodeOp-tech/fspt18-team-2.git newbranch2  
+git push https://github.com/CodeOp-tech/fspt18-team-2.git newbranch4 
 
 Express.js (Web Framework):
 Installation: npm install express
@@ -83,7 +83,7 @@ Node Package Manager
 Installation: npm install jsonwebtoken
 
 
-postman http://localhost:5001/auth
+postman http://localhost:5001/auth/
 
 
 */
@@ -108,21 +108,23 @@ router.post('/register', async (req, res) => {
 
     if (userRegistered) {
       return res.json({ message: 'You already have an account, please login' });
+    } else {
+
+      // Hash the password
+      const saltRounds = 10;
+      const Salt = await bcrypt.genSalt(saltRounds);
+      const hashedPassword = await bcrypt.hash(registerPassword, Salt);
+
+      // Create a new user with the hashed password
+      const newUser = await User.create({
+        Email: registerEmail,
+        Password: hashedPassword,
+        FullName,
+      });
+
+      res.json({ message: 'User registered successfully', user: newUser });
+      
     }
-
-    // Hash the password
-    const saltRounds = 10;
-    const Salt = await bcrypt.genSalt(saltRounds);
-    const hashedPassword = await bcrypt.hash(registerPassword, Salt);
-
-    // Create a new user with the hashed password
-    const newUser = await User.create({
-      Email: registerEmail,
-      Password: hashedPassword,
-      FullName,
-    });
-
-    res.json({ message: 'User registered successfully', user: newUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Registration failed' });

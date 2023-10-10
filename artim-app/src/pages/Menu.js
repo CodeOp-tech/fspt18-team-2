@@ -37,9 +37,10 @@ export default function Menu() {
               <span className="font-bold">Log Out</span>
             </Link>
 
-            <Link className="flex items-center gap-2" href="/posts">
+            <Link className="flex items-center gap-2  text-neutral-700"
+              href="/creationpost">
               <TfiLayoutListPost />
-              <span>CREATE POST</span>
+              <span className="font-bold">CREATE POST</span>
             </Link>
           </>
         ) : (
@@ -56,14 +57,14 @@ export default function Menu() {
               className="flex items-center gap-2 text-amber-400"
             >
               <BiSolidUserCircle />
-              <span>Register</span>
+              <span className="font-bold">Register</span>
             </Link>
           </>
         )}
 
         <Link href="/" className="flex items-center gap-2 text-neutral-700">
           <AiFillHome />
-          <span>Home</span>
+          <span className="font-bold">Home</span>
         </Link>
 
         <Link
@@ -71,7 +72,7 @@ export default function Menu() {
           className="flex items-center gap-2 text-neutral-700"
         >
           <BsSearchHeart />
-          <span>Explore</span>
+          <span className="font-bold">Explore</span>
         </Link>
       </div>
     </header>

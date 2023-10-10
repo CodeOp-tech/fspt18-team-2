@@ -105,7 +105,7 @@ router.get('/:searched', authenticate, async (req, res) => {
     // Searching for users
     const userInfo = await User.findAll({
       where: {
-        [Op.and]: [
+        [Op.or]: [
           { FullName: { [Op.like]: `%${searchTermWithoutPhrases}%` } },
           { UserCategory: { [Op.like]: `%${searchTermWithoutPhrases}%` } },
           { UserBio: { [Op.like]: `%${searchTermWithoutPhrases}%` } },
@@ -121,7 +121,7 @@ router.get('/:searched', authenticate, async (req, res) => {
       attributes: ['UserID', 'FullName', 'UserCategory', 'UserBio'],
     });
     
-
+console.log("UserInfo", userInfo)
     // Searching for posts
     const postInfo = await Posts.findAll({
       where: {
