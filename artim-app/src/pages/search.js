@@ -11,8 +11,9 @@ export default function search() {
   
   return (
     <div>
-     
-     {!isLogged ? <PublicSearch /> : <UserSearch />}
+     <PublicSearch />
+      
+     {/*!isLogged ? <PublicSearch /> : <UserSearch /> */}
 
     </div>
   );

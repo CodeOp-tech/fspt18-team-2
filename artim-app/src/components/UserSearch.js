@@ -110,13 +110,13 @@ const UserSearch = () => {
             {apiResponse.message} <IoCheckmarkDoneCircleSharp />
           </div>
 
-          <Divider className="my-4" />
+              {/* <Divider className="my-4" />
           <div className="flex gap-6 justify-end">
             <h2>Pagination:</h2>
             <h4>Total Pages: {apiResponse.pagination.page}</h4>
             <h4> Max Posts x Page : {apiResponse.pagination.limit}</h4>
             <h4>Total Posts: {apiResponse.pagination.totalPostInfoCount}</h4>
-          </div>
+      </div>*/}
 
           <Pagination
             currentPage={currentPage}

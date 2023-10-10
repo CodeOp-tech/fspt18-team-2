@@ -6,9 +6,10 @@ import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import Pagination from "./Pagination";
 import HighlightText from "./HighlightText";
 
-const logoSrc = "../public/logo/logo.png";
 
-const PublicSearch = () => {
+
+
+  const PublicSearch = () => {
   const [apiResponse, setApiResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -66,18 +67,24 @@ const PublicSearch = () => {
   }, [searchedTerm, currentPage]);
 
   return (
-    <div className="bg-white h-screen overflow-hidden flex flex-col items-center justify-top font-alegreya-sans">
-      <div className=" text-black p-8 text-center font-alegreya-sans">
-        {/* Display the logo */}
+    <div className="bg-white h-screen flex-col items-center justify-top font-alegreya-sans">
+      <div className=" text-black p-8 text-center font-alegreya-sans  drop-shadow-md ">
+        
+      <div>
 
-        <Image src={logoSrc} alt="Logo" width={50} height={50} />
+        { <Image src="/logo/logo.png" alt="Logo" width={50} height={50} /> }
 
-        <h1 className="mb-2 text-5xl font-bold mx-auto text-pink-500 font-alegreya-sans mb-2">
+
+        <h1 className="mb-2 text-5xl font-bold mx-auto text-pink-500 font-alegreya-sans ">
           Explore
         </h1>
         <h3 className="italic mb-12 text-neutral-500">
           posts, categories, artists...
         </h3>
+        </div>
+
+
+
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -96,9 +103,20 @@ const PublicSearch = () => {
             className="bg-amber-300 text-white font-extrabold rounded-lg hover:bg-amber-500 ml-2"
           ></Button>
         </form>
+
+
+
+
+
+
         {foundImage && (
-          <Image src={foundImage} shadow="lg" layout="responsive" isZoomed />
+        
+            <Image src={foundImage} width={100} height={100} shadow="lg" layout="responsive" isZoomed />
         )}
+
+
+
+
       </div>
 
       {loading ? (
@@ -106,18 +124,18 @@ const PublicSearch = () => {
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : found ? (
-        <div>
+        <div className=" text-black p-8 text-center font-alegreya-sans  drop-shadow-md ">
           <div className="flex items-center gap-2">
             {apiResponse.message} <IoCheckmarkDoneCircleSharp />
           </div>
 
-          <Divider className="my-4" />
+              { /*<Divider className="my-4" />
           <div className="flex gap-6 justify-end">
             <h2>Pagination:</h2>
             <h4>Total Pages: {apiResponse.pagination.page}</h4>
             <h4> Max Posts x Page : {apiResponse.pagination.limit}</h4>
             <h4>Total Posts: {apiResponse.pagination.totalPostInfoCount}</h4>
-          </div>
+      </div>*/}
 
           <Pagination
             currentPage={currentPage}
@@ -125,6 +143,8 @@ const PublicSearch = () => {
             onPageChange={handlePageChange}
           />
 
+              
+              <div className="flex-col items-center ">
           <ul>
             {apiResponse.postInfo.map((item) => (
               <li key={item.id}>
@@ -152,6 +172,7 @@ const PublicSearch = () => {
                     shadow="lg"
                     layout="responsive"
                     isZoomed
+                    
                   />
                   {Array.isArray(item.Category) ? (
                     item.Category.map((v) => (
@@ -190,14 +211,11 @@ const PublicSearch = () => {
             ))}
           </ul>
 
-          <div>
-            <p>Pagination:</p>
-            <p>Page: {apiResponse.pagination.page}</p>
-            <p>Limit: {apiResponse.pagination.limit}</p>
-            <p>
-              Total Post Info Count: {apiResponse.pagination.totalPostInfoCount}
-            </p>
-          </div>
+              </div>
+
+
+
+
         </div>
       ) : null}
     </div>
@@ -205,3 +223,6 @@ const PublicSearch = () => {
 };
 
 export default PublicSearch;
+
+
+
