@@ -62,8 +62,7 @@ router.put("/:id", async (req, res) => {
   try {
     console.log("req.body", req.body)
     await db(`UPDATE Posts
-    SET UserID = ${req.body.UserID},
-    Title = '${req.body.Title}',
+    SET Title = '${req.body.Title}',
     Category = '${req.body.Category}',
     Body = '${req.body.Body}',
     Image1 = '${req.body.Image1}',

@@ -18,8 +18,9 @@ export function PostsList() {
 
   return (
     <>
-      <div className="p-8">
-        <h1 className="pb-14 pt-14 text-right">FIND YOUR INSPIRATION</h1>
+      <div className="p-10">
+        <h2 className="mt-14 mb-6 text-right text-5xl font-semibold">Find your</h2>
+        <h2 className="mb-14 text-right text-5xl font-semibold text-pink-500">inspiration</h2>
         <div className="p-8"></div>
         <div className="grid grid-cols-4 gap-6">
           {posts.map((post) => (
@@ -27,9 +28,13 @@ export function PostsList() {
               <Link href={`/post/${post.id}`} passHref>
                 <img src={post.Image1} alt={post.Title} />
               </Link>
-              <p>{post.Title}</p>
-              <p>{post.Category}</p>
-              <div className="h-24 overflow-hidden text-xs" dangerouslySetInnerHTML={{ __html: post.Body }} />
+              <div className="mb-2 mt-1 font-semibold">
+              <span>{post.Title}</span>
+              </div>
+              <div className="mb-4 h-24 overflow-hidden text-xs text-neutral-500" dangerouslySetInnerHTML={{ __html: post.Body }} />
+              <div className="bg-neutral-200 text-xs text-left w-fit text-neutral-600 py-1 px-2 rounded-md">
+              <span>{post.Category}</span>
+              </div>
             </div>
           ))}
         </div>

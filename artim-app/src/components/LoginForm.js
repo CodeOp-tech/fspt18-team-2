@@ -113,7 +113,7 @@ function LoginForm() {
         </form>
       )}
       {error && <p className="error-message text-red-700 mb-6">{error}</p>}
-      <Link href="/registration" className="text-pink-500 ">
+      <Link href="/registration" className="text-pink-500">
           <span className="font-bold mb-8 hover:text-pink-700">Or Sign Up</span>
         </Link>
       </div>
