@@ -20,7 +20,6 @@ function LoginForm() {
       return;
     }
     
-
     const formData = {
       Email: email,
       Password: password,
@@ -50,8 +49,6 @@ function LoginForm() {
         // Set the token in the state
         login(token);
        
-
-
         console.log("User logged in successfully");
         console.log("Token:", token);
       } else {
@@ -95,26 +92,15 @@ function LoginForm() {
         <p className="italic mb-12 text-neutral-500"> If you already have an account! </p>  
   </div>
 )}
-
-
-
-
-
-      
-        
       {isLogged ? (
         <div>
           <p className="success-message">Logged in successfully!</p>
             <button className="bg-pink-500 text-white font-extrabold py-2 px-4 rounded-md w-full mb-8 drop-shadow-md" onClick={handleLogout}>Logout</button>
-         
-            
             <div className="block w-full rounded-md py-2 px-3 border border-gray-400 focus:border-teal-100 focus:ring focus:ring-teal-200 drop-shadow-lg"> 
   <Link href="/" className="text-pink-500 ">
     <span className="font-bold mb-8 hover:text-pink-700"> Get Inspired! </span>
     </Link>
             </div>
-
-
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
@@ -125,8 +111,8 @@ function LoginForm() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-                required
-                className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200"
+              required
+              className="block w-full rounded-md py-2 px-3 border border-gray-300 focus:border-teal-100 focus:ring focus:ring-teal-200"
             />
           </div>
           <div>
@@ -148,13 +134,8 @@ function LoginForm() {
         </form>
       )}
       {error && <p className="error-message text-red-700 mb-6">{error}</p>}
-
-      
         </div> 
     </div>
-
-
-    
   );
 }
 
