@@ -17,20 +17,12 @@ Re-imagining art!
 - #### Andrea Hočevar
 - #### Arema Arega
 
-
-
-
 ## Workstation
 - Visual Studio Code editor 
 - https://code.visualstudio.com/
 
-
 ## Framework
 - React
-
-
-## Configuration
-### Dependencies
 
 # Artim: 
 
@@ -62,7 +54,7 @@ JWT_SECRET=yoursecretlongkey (after adding JWT re-start the app)
 ```
 - Run `node model/database.js` or `npm install` to install the server's required packages
 - Run `npm run migrate` to create your DB tables
-![schema](./drawSQL-remotogether-export-2023-08-19.png)
+![schema](./artimdb BBDD schema.png)
 - Next, `cd artim-app` and `npm install` to install all client dependencies
 
 ### Run development servers
@@ -104,8 +96,6 @@ JWT_SECRET=yoursecretlongkey (after adding JWT re-start the app)
     - react-hot-toast
     - react-icons
     - typeface-inter
-
-
 
 ### 1. Front end
 
@@ -190,17 +180,7 @@ Explore `/search`:
 - usa el comando git stash  para guardar tus últimos cambios
 - una vez hechos todos los pasos del punto 2, verifica que estés en tu rama y usa el comando git stash pop para recuperar tus cambios guardados
 
-
-
-
-
-
-
-
-
 # Extended Info about the App
-
-
 
 # BACK
 
@@ -226,13 +206,8 @@ Explore `/search`:
 ####  - users
 ###### - - > User Profile Creation, Modification & Post managment
 
-
 - ### MIDELWARE 
 #####  - - > veryfyToken
-
-
-
-
 
 ## Backend Resources & Frameworks
 - ### MySQL  
@@ -245,8 +220,6 @@ Explore `/search`:
 ```
 npm install express
 ```
-
-
 ## Libraries Backend
 - ### Sequelize 
 - Object-Relational Mapping for Databases
@@ -281,14 +254,6 @@ npm install jsonwebtoken
 - API testing and development
 - https://www.postman.com/downloads/
 
-
-
-
-
-
-
-
-
 # FRONT
 
 
@@ -301,8 +266,6 @@ npm install jsonwebtoken
  
  - ### src:
  
-
-
 # All Pages are wrapped with:
 
 ## _index.js 
@@ -340,7 +303,6 @@ http://localhost:3000/registration
 ####  Registration
 - ##### User registration form with error handling. 
 
-
 ## Explore
 http://localhost:3000/search
 - Renders:
@@ -352,7 +314,6 @@ Using the Components:
 ###### - - > Component to highlight text matches with a specified term.
 #### - Pagination
 ##### - - > Pagination component with next/previous buttons.
-
 
 ## Create Post
 - ##### Dynamic form for creating blog posts. 
@@ -366,8 +327,6 @@ Using the Component:
 ## Post
 - ##### Display post details with dynamic data retrieval based on ID
 http://localhost:3000/post/1
-
-
 
 
 ## Frontend Resources & Frameworks
@@ -414,8 +373,6 @@ npm i @nextui-org/react framer-motion
 npm install axios
 ````
 
-
-
 - ### React-hot-toast 
 - Notification library for React applications 
 - https://react-hot-toast.com/
@@ -433,7 +390,6 @@ npm install react-hook-form
 ## Frontend Resources
 -  UX/UI design, prototyping, collaboration, developer handoff...
 - https://www.figma.com/
-
 
 ## Possible Future Features:
 - User Profile
