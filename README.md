@@ -44,7 +44,9 @@ JWT_SECRET=yoursecretlongkey (after adding JWT re-start the app)
 ```
 - Run `node model/database.js` or `npm install` to install the server's required packages
 - Run `npm run migrate` to create your DB tables
-![schema](./artimdb BBDD schema.png)
+
+![artimdb BBDD schema.png](https://github.com/CodeOp-tech/fspt18-team-2/blob/a8bcd4d9a73f54fe35da7d9a47298ce5be44b295/artimdbBBDDschema.png)
+
 - Next, `cd artim-app` and `npm install` to install all client dependencies
 
 ### Run development servers
