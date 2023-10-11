@@ -24,16 +24,6 @@ Re-imagining art!
 ## Framework
 - React
 
-# Artim: 
-
-Creative hub & artist community
-
-Re-imagining art!
-
-Sharing resources, tips, events about fine arts & audio visual work and artists all over the world.
-
-Post about your ideas, your work, your inspirations and inspire the world!
-
 
 ## Configuration
 ### Dependencies
