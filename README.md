@@ -32,6 +32,20 @@ Re-imagining art!
 ## Configuration
 ### Dependencies
 
+# Artim: 
+
+Creative hub & artist community
+
+Re-imagining art!
+
+Sharing resources, tips, events about fine arts & audio visual work and artists all over the world.
+
+Post about your ideas, your work, your inspirations and inspire the world!
+
+
+## Configuration
+### Dependencies
+
 To get started:
 
 - In MySQL, create a database named `artimdb`:
@@ -58,11 +72,13 @@ JWT_SECRET=yoursecretlongkey (after adding JWT re-start the app)
 - You can check client's app at `http://localhost:3001`
 - You can check API at `http://localhost:5001/nameoftable`
 
+
 ## INTRO to the App
 
 
 
 #### Technology Stack intro
+
 
     - ckeditor
     - axios
@@ -90,7 +106,9 @@ JWT_SECRET=yoursecretlongkey (after adding JWT re-start the app)
     - typeface-inter
 
 
+
 ### 1. Front end
+
 #### Routes
 
 Posts:
@@ -171,6 +189,7 @@ Explore `/search`:
 
 - usa el comando git stash  para guardar tus últimos cambios
 - una vez hechos todos los pasos del punto 2, verifica que estés en tu rama y usa el comando git stash pop para recuperar tus cambios guardados
+
 
 
 
@@ -429,4 +448,7 @@ npm install react-hook-form
 
 
 
+
+
+_Este es un proyecto de estudiante creado en [CodeOp](http://codeop.tech), un bootcamp de desarrollo full stack en Barcelona._
 
