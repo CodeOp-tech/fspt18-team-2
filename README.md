@@ -1,5 +1,5 @@
 # ARTIM
-![Local Image]([artim-app\public\logo\logo.png](https://github.com/CodeOp-tech/fspt18-team-2/blob/main/artim-app/public/logo/logo.png?raw=true))
+![Local Image](https://github.com/CodeOp-tech/fspt18-team-2/blob/main/artim-app/public/logo/logo.png?raw=true))
 
 ## Creative hub & artist community
 
