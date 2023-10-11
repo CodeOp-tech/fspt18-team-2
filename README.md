@@ -97,7 +97,7 @@ JWT_SECRET=yoursecretlongkey (after adding JWT re-start the app)
     - react-icons
     - typeface-inter
 
-### 1. Front end
+### 1. Back end
 
 #### Routes
 
