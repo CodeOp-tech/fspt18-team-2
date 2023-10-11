@@ -1,4 +1,36 @@
-# fspt18-team-2
+# ARTIM
+![Local Image](artim-app\public\logo\logo.png)
+
+## Creative hub & artist community
+
+Re-imagining art!
+
+- Sharing resources, tips, events about fine arts, audio visual work and artists all over the world.
+
+- Post about your ideas, your work, your inspirations and inspire the world!
+
+## Art Blog
+- fspt18-team-2
+- CODEOP 6-MONTH BOOTCAMP - FINAL TEAM PROJECT
+### Members:
+- #### Amandine Demunynck
+- #### Andrea Hočevar
+- #### Arema Arega
+
+
+
+
+## Workstation
+- Visual Studio Code editor 
+- https://code.visualstudio.com/
+
+
+## Framework
+- React
+
+
+## Configuration
+### Dependencies
 
 # Artim: 
 
@@ -40,11 +72,13 @@ JWT_SECRET=yoursecretlongkey (after adding JWT re-start the app)
 - You can check client's app at `http://localhost:3001`
 - You can check API at `http://localhost:5001/nameoftable`
 
-## How is the app
 
-### 1. Backend
+## INTRO to the App
 
-#### Tecnologies
+
+
+#### Technology Stack intro
+
 
     - ckeditor
     - axios
@@ -70,6 +104,10 @@ JWT_SECRET=yoursecretlongkey (after adding JWT re-start the app)
     - react-hot-toast
     - react-icons
     - typeface-inter
+
+
+
+### 1. Front end
 
 #### Routes
 
@@ -152,4 +190,265 @@ Explore `/search`:
 - usa el comando git stash  para guardar tus últimos cambios
 - una vez hechos todos los pasos del punto 2, verifica que estés en tu rama y usa el comando git stash pop para recuperar tus cambios guardados
 
+
+
+
+
+
+
+
+
+# Extended Info about the App
+
+
+
+# BACK
+
+## Backend Structure
+
+- ### DATABASE
+#### TABLES:
+ ###### - Users
+ ###### - ArtCategories
+ ###### - Posts
+
+- ### SERVER
+### Routes:
+#### - index
+#### - auth:
+###### - - > User Registration, Login & Token creation
+#### - categories:
+###### - - > Category Selector
+#### - posts:
+###### - - > to Get, Modify & Delete Posts
+#### public_search
+###### - - > Searching inside the Posts - Category, Title & Body
+####  - users
+###### - - > User Profile Creation, Modification & Post managment
+
+
+- ### MIDELWARE 
+#####  - - > veryfyToken
+
+
+
+
+
+## Backend Resources & Frameworks
+- ### MySQL  
+- Relational database management system
+- https://www.mysql.com/downloads/
+
+- ### Express 
+- Node.js web application framework
+- https://expressjs.com/
+```
+npm install express
+```
+
+
+## Libraries Backend
+- ### Sequelize 
+- Object-Relational Mapping for Databases
+-  https://sequelize.org/docs/v6/getting-started/
+````
+npm install --save sequelize
+````
+
+- ### bcrypt 
+- Password Hashing
+- https://www.npmjs.com/package/bcrypt
+````
+npm install bcrypt
+````
+
+- ### dotenv 
+- Environment Variables Management
+- https://www.npmjs.com/package/dotenv
+````
+npm install dotenv
+````
+
+- ### JSON Web Tokens (JWT) 
+- Token-based authentication
+- https://github.com/auth0/node-jsonwebtoken
+````
+npm install jsonwebtoken
+````
+
+## Backend Resources
+- ### Postman 
+- API testing and development
+- https://www.postman.com/downloads/
+
+
+
+
+
+
+
+
+
+# FRONT
+
+
+## Frontend Structure
+
+# artim-app:
+
+- ### public
+###### - - > logo
+ 
+ - ### src:
+ 
+
+
+# All Pages are wrapped with:
+
+## _index.js 
+ - Custom Next.js document
+
+## _app 
+ - layout or wrapper for the entire application - NextUIProvider, AuthProvider, Menu, Toaster
+ - Renders:
+ ### Menu 
+#### - - > User-authenticated dynamic menu for website navigation
+with toast notifications.
+
+# Pages:
+
+## Home 
+http://localhost:3000/
+- Renders: 
+
+### PostsList component
+- Grid display of posts with titles, images, and categories.
+
+
+## Login
+http://localhost:3000/login
+- Renders:
+#### LoginForm
+- #####  User login/logout with error handling
+Using the Components:
+##### - AuthContext
+###### - - > Global Authentification provider with login and logout functionality - token 
+
+## Register
+http://localhost:3000/registration
+- Renders:
+####  Registration
+- ##### User registration form with error handling. 
+
+
+## Explore
+http://localhost:3000/search
+- Renders:
+
+### PublicSearch component
+- #####  Search results with pagination feature.
+Using the Components:
+#### - getHighlihtedText
+###### - - > Component to highlight text matches with a specified term.
+#### - Pagination
+##### - - > Pagination component with next/previous buttons.
+
+
+## Create Post
+- ##### Dynamic form for creating blog posts. 
+
+- http://localhost:3000/creationpost
+
+Using the Component:
+##### - Editor
+###### - - > Text editor component with CKEditor
+
+## Post
+- ##### Display post details with dynamic data retrieval based on ID
+http://localhost:3000/post/1
+
+
+
+
+## Frontend Resources & Frameworks
+- ### Nextjs 
+- React Framework
+- https://nextjs.org/docs
+-  npm install next
+
+
+## Libraries Frontend
+
+- ### Tailwind CSS 
+- CSS Framework
+- https://tailwindui.com/documentation
+- https://tailwind.build/classes
+````
+npm install tailwindcss@latest
+````
+
+- ### React Icons 
+- for Integrating icon components into React applications
+- https://react-icons.github.io/react-icons/
+````
+npm install react-icons --save
+````
+
+- ### CKEditor
+- Web text editor for formatting, media, tables, and collaboration
+- https://ckeditor.com/
+````
+npm install --save ckeditor4-react
+````
+
+- ### NextUI
+- Responsive, customizable UI framework for web applications.
+- https://nextui.org/docs/guide/introduction
+````
+npm i @nextui-org/react framer-motion
+````
+
+- ### Axios 
+- JavaScript library for making HTTP requests.
+````
+npm install axios
+````
+
+
+
+- ### React-hot-toast 
+- Notification library for React applications 
+- https://react-hot-toast.com/
+````
+npm install react-hot-toast
+````
+
+### React Hook Forms
+-  Form handling, validation, and state management using React hooks
+- https://react-hook-form.com/
+````
+npm install react-hook-form
+````
+
+## Frontend Resources
+-  UX/UI design, prototyping, collaboration, developer handoff...
+- https://www.figma.com/
+
+
+## Possible Future Features:
+- User Profile
+- User categories
+- Costum Tagging
+- Adding more Art Categories
+- Images Uploader
+- User Events...
+
+
+
+
+
+
+
+
 _Este es un proyecto de estudiante creado en [CodeOp](http://codeop.tech), un bootcamp de desarrollo full stack en Barcelona._
+
