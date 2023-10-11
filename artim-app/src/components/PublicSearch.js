@@ -88,7 +88,7 @@ const PublicSearch = () => {
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : found ? (
-        <div className=" text-black p-8 text-center font-alegreya-sans  drop-shadow-md ">
+        <div className=" text-black p-8 text-center font-alegreya-sans drop-shadow-md ">
           <div className="flex-col items-center mt-4">
             <ul className="grid grid-cols-4 gap-6">
               {apiResponse.postInfo.map((post) => (
