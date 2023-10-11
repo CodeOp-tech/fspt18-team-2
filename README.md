@@ -151,3 +151,5 @@ Explore `/search`:
 
 - usa el comando git stash  para guardar tus últimos cambios
 - una vez hechos todos los pasos del punto 2, verifica que estés en tu rama y usa el comando git stash pop para recuperar tus cambios guardados
+
+_Este es un proyecto de estudiante creado en [CodeOp](http://codeop.tech), un bootcamp de desarrollo full stack en Barcelona._
