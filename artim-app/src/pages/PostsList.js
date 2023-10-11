@@ -22,7 +22,9 @@ export function PostsList() {
         <div className="grid grid-cols-4 gap-6">
           {posts.map((post) => (
             <div className="flex flex-col" key={post.id}>
-              <Link href={`/post/${post.id}`} passHref>
+              <Link 
+              className="rounded-lg overflow-hidden"
+              href={`/post/${post.id}`} passHref>
                 <img src={post.Image1} alt={post.Title} />
               </Link>
               <div className="mb-2 mt-1 font-semibold">
